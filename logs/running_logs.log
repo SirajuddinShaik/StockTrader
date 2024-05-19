@@ -1,0 +1,165 @@
+[2024-05-19 12:53:55,224: INFO: stage_01_data_ingestion: >>>>>>>>>>>>> Data Ingestion stage started <<<<<<<]
+[2024-05-19 12:53:55,227: INFO: common: yaml file: config\config.yaml loaded successfully]
+[2024-05-19 12:53:55,228: INFO: common: yaml file: params.yaml loaded successfully]
+[2024-05-19 12:53:55,229: ERROR: stage_01_data_ingestion: yaml file is empty]
+Traceback (most recent call last):
+  File "c:\users\shaik\desktop\docker\stocktrader\src\stock_agent\utils\common.py", line 32, in read_yaml
+    return ConfigBox(content)
+           ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\shaik\Documents\Programing\TFOD\tfod\Lib\site-packages\box\box.py", line 259, in __init__
+    raise BoxValueError("First argument must be mapping or iterable")
+box.exceptions.BoxValueError: First argument must be mapping or iterable
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\shaik\Desktop\Docker\StockTrader\src\stock_agent\pipeline\stage_01_data_ingestion.py", line 24, in <module>
+    obj.main()
+  File "C:\Users\shaik\Desktop\Docker\StockTrader\src\stock_agent\pipeline\stage_01_data_ingestion.py", line 13, in main
+    config = ConfigurationManager()
+             ^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\users\shaik\desktop\docker\stocktrader\src\stock_agent\config\configuration.py", line 13, in __init__
+    self.params = read_yaml(params_filepath)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\shaik\Documents\Programing\TFOD\tfod\Lib\site-packages\ensure\main.py", line 849, in __call__
+    return_val = self.f(*args, **kwargs)
+                 ^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\users\shaik\desktop\docker\stocktrader\src\stock_agent\utils\common.py", line 34, in read_yaml
+    raise ValueError("yaml file is empty")
+ValueError: yaml file is empty
+[2024-05-19 12:54:42,533: INFO: stage_01_data_ingestion: >>>>>>>>>>>>> Data Ingestion stage started <<<<<<<]
+[2024-05-19 12:54:42,535: INFO: common: yaml file: config\config.yaml loaded successfully]
+[2024-05-19 12:54:42,542: INFO: common: yaml file: params.yaml loaded successfully]
+[2024-05-19 12:54:42,546: INFO: common: yaml file: schema.yaml loaded successfully]
+[2024-05-19 12:54:42,547: INFO: common: created directory at: artifacts]
+[2024-05-19 12:54:42,549: INFO: common: created directory at: artifacts/data_ingestion]
+[2024-05-19 12:54:42,551: ERROR: stage_01_data_ingestion: [Errno 2] No such file or directory: 'stock_agent/components/stock_names.txt']
+Traceback (most recent call last):
+  File "C:\Users\shaik\Desktop\Docker\StockTrader\src\stock_agent\pipeline\stage_01_data_ingestion.py", line 24, in <module>
+    obj.main()
+  File "C:\Users\shaik\Desktop\Docker\StockTrader\src\stock_agent\pipeline\stage_01_data_ingestion.py", line 16, in main
+    data_ingestion.download_new_data()
+  File "c:\users\shaik\desktop\docker\stocktrader\src\stock_agent\components\data_ingestion.py", line 20, in download_new_data
+    f = open(self.config.source_URL)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'stock_agent/components/stock_names.txt'
+[2024-05-19 12:56:06,816: INFO: stage_01_data_ingestion: >>>>>>>>>>>>> Data Ingestion stage started <<<<<<<]
+[2024-05-19 12:56:06,832: INFO: common: yaml file: config\config.yaml loaded successfully]
+[2024-05-19 12:56:06,835: INFO: common: yaml file: params.yaml loaded successfully]
+[2024-05-19 12:56:06,839: INFO: common: yaml file: schema.yaml loaded successfully]
+[2024-05-19 12:56:06,840: INFO: common: created directory at: artifacts]
+[2024-05-19 12:56:06,843: INFO: common: created directory at: artifacts/data_ingestion]
+[2024-05-19 12:56:06,866: ERROR: stage_01_data_ingestion: DataIngestion.get_interval() takes from 0 to 1 positional arguments but 2 were given]
+Traceback (most recent call last):
+  File "C:\Users\shaik\Desktop\Docker\StockTrader\src\stock_agent\pipeline\stage_01_data_ingestion.py", line 24, in <module>
+    obj.main()
+  File "C:\Users\shaik\Desktop\Docker\StockTrader\src\stock_agent\pipeline\stage_01_data_ingestion.py", line 16, in main
+    data_ingestion.download_new_data()
+  File "c:\users\shaik\desktop\docker\stocktrader\src\stock_agent\components\data_ingestion.py", line 22, in download_new_data
+    ll,ul = self.get_interval(5)
+            ^^^^^^^^^^^^^^^^^^^^
+TypeError: DataIngestion.get_interval() takes from 0 to 1 positional arguments but 2 were given
+[2024-05-19 12:57:00,736: INFO: stage_01_data_ingestion: >>>>>>>>>>>>> Data Ingestion stage started <<<<<<<]
+[2024-05-19 12:57:00,739: INFO: common: yaml file: config\config.yaml loaded successfully]
+[2024-05-19 12:57:00,740: INFO: common: yaml file: params.yaml loaded successfully]
+[2024-05-19 12:57:00,743: INFO: common: yaml file: schema.yaml loaded successfully]
+[2024-05-19 12:57:00,744: INFO: common: created directory at: artifacts]
+[2024-05-19 12:57:00,745: INFO: common: created directory at: artifacts/data_ingestion]
+[2024-05-19 12:57:00,746: ERROR: stage_01_data_ingestion: name 'api' is not defined]
+Traceback (most recent call last):
+  File "C:\Users\shaik\Desktop\Docker\StockTrader\src\stock_agent\pipeline\stage_01_data_ingestion.py", line 24, in <module>
+    obj.main()
+  File "C:\Users\shaik\Desktop\Docker\StockTrader\src\stock_agent\pipeline\stage_01_data_ingestion.py", line 16, in main
+    data_ingestion.download_new_data()
+  File "c:\users\shaik\desktop\docker\stocktrader\src\stock_agent\components\data_ingestion.py", line 24, in download_new_data
+    uri = uri_format.format(api = api, interval = interval, start_date = ll, end_date = ul, symbol = symbols[i].strip())
+                                  ^^^
+NameError: name 'api' is not defined
+[2024-05-19 13:02:01,929: INFO: stage_01_data_ingestion: >>>>>>>>>>>>> Data Ingestion stage started <<<<<<<]
+[2024-05-19 13:02:01,931: INFO: common: yaml file: config\config.yaml loaded successfully]
+[2024-05-19 13:02:01,932: INFO: common: yaml file: params.yaml loaded successfully]
+[2024-05-19 13:02:01,933: INFO: common: yaml file: schema.yaml loaded successfully]
+[2024-05-19 13:02:01,934: INFO: common: created directory at: artifacts]
+[2024-05-19 13:02:01,937: INFO: common: created directory at: artifacts/data_ingestion]
+[2024-05-19 13:03:04,263: ERROR: stage_01_data_ingestion: 'values']
+Traceback (most recent call last):
+  File "C:\Users\shaik\Desktop\Docker\StockTrader\src\stock_agent\pipeline\stage_01_data_ingestion.py", line 26, in <module>
+    obj.main()
+  File "C:\Users\shaik\Desktop\Docker\StockTrader\src\stock_agent\pipeline\stage_01_data_ingestion.py", line 17, in main
+    data_ingestion.download_new_data()
+  File "c:\users\shaik\desktop\docker\stocktrader\src\stock_agent\components\data_ingestion.py", line 30, in download_new_data
+    data = response["values"]
+           ~~~~~~~~^^^^^^^^^^
+KeyError: 'values'
+[2024-05-19 13:04:03,570: INFO: stage_01_data_ingestion: >>>>>>>>>>>>> Data Ingestion stage started <<<<<<<]
+[2024-05-19 13:04:03,572: INFO: common: yaml file: config\config.yaml loaded successfully]
+[2024-05-19 13:04:03,574: INFO: common: yaml file: params.yaml loaded successfully]
+[2024-05-19 13:04:03,576: INFO: common: yaml file: schema.yaml loaded successfully]
+[2024-05-19 13:04:03,577: INFO: common: created directory at: artifacts]
+[2024-05-19 13:04:03,578: INFO: common: created directory at: artifacts/data_ingestion]
+[2024-05-19 13:04:45,893: INFO: stage_01_data_ingestion: >>>>>>>>>>>>> Data Ingestion stage started <<<<<<<]
+[2024-05-19 13:04:45,899: INFO: common: yaml file: config\config.yaml loaded successfully]
+[2024-05-19 13:04:45,904: INFO: common: yaml file: params.yaml loaded successfully]
+[2024-05-19 13:04:45,906: INFO: common: yaml file: schema.yaml loaded successfully]
+[2024-05-19 13:04:45,907: INFO: common: created directory at: artifacts]
+[2024-05-19 13:04:45,908: INFO: common: created directory at: artifacts/data_ingestion]
+[2024-05-19 13:05:30,668: INFO: stage_01_data_ingestion: >>>>>>>>>>>>> Data Ingestion stage started <<<<<<<]
+[2024-05-19 13:05:30,671: INFO: common: yaml file: config\config.yaml loaded successfully]
+[2024-05-19 13:05:30,673: INFO: common: yaml file: params.yaml loaded successfully]
+[2024-05-19 13:05:30,674: INFO: common: yaml file: schema.yaml loaded successfully]
+[2024-05-19 13:05:30,675: INFO: common: created directory at: artifacts]
+[2024-05-19 13:05:30,676: INFO: common: created directory at: artifacts/data_ingestion]
+[2024-05-19 13:05:35,610: ERROR: stage_01_data_ingestion: [Errno 22] Invalid argument: 'artifacts/data_ingestion/AAPL\n.csv']
+Traceback (most recent call last):
+  File "C:\Users\shaik\Desktop\Docker\StockTrader\src\stock_agent\pipeline\stage_01_data_ingestion.py", line 26, in <module>
+    obj.main()
+  File "C:\Users\shaik\Desktop\Docker\StockTrader\src\stock_agent\pipeline\stage_01_data_ingestion.py", line 17, in main
+    data_ingestion.download_new_data()
+  File "c:\users\shaik\desktop\docker\stocktrader\src\stock_agent\components\data_ingestion.py", line 32, in download_new_data
+    df.to_csv(self.config.local_data_file + f"{symbols[i]}.csv")
+  File "C:\Users\shaik\Documents\Programing\TFOD\tfod\Lib\site-packages\pandas\core\generic.py", line 3772, in to_csv
+    return DataFrameRenderer(formatter).to_csv(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\shaik\Documents\Programing\TFOD\tfod\Lib\site-packages\pandas\io\formats\format.py", line 1186, in to_csv
+    csv_formatter.save()
+  File "C:\Users\shaik\Documents\Programing\TFOD\tfod\Lib\site-packages\pandas\io\formats\csvs.py", line 240, in save
+    with get_handle(
+         ^^^^^^^^^^^
+  File "C:\Users\shaik\Documents\Programing\TFOD\tfod\Lib\site-packages\pandas\io\common.py", line 859, in get_handle
+    handle = open(
+             ^^^^^
+OSError: [Errno 22] Invalid argument: 'artifacts/data_ingestion/AAPL\n.csv'
+[2024-05-19 13:06:15,162: INFO: stage_01_data_ingestion: >>>>>>>>>>>>> Data Ingestion stage started <<<<<<<]
+[2024-05-19 13:06:15,164: INFO: common: yaml file: config\config.yaml loaded successfully]
+[2024-05-19 13:06:15,165: INFO: common: yaml file: params.yaml loaded successfully]
+[2024-05-19 13:06:15,166: INFO: common: yaml file: schema.yaml loaded successfully]
+[2024-05-19 13:06:15,167: INFO: common: created directory at: artifacts]
+[2024-05-19 13:06:15,168: INFO: common: created directory at: artifacts/data_ingestion]
+[2024-05-19 13:06:20,423: INFO: stage_01_data_ingestion: >>>>>>>>>>>>> Data Ingestion stage completed <<<<<<<]
+[2024-05-19 13:09:37,361: INFO: stage_01_data_ingestion: >>>>>>>>>>>>> Data Ingestion stage started <<<<<<<]
+[2024-05-19 13:09:37,361: INFO: common: yaml file: config\config.yaml loaded successfully]
+[2024-05-19 13:09:37,377: INFO: common: yaml file: params.yaml loaded successfully]
+[2024-05-19 13:09:37,377: INFO: common: yaml file: schema.yaml loaded successfully]
+[2024-05-19 13:09:37,377: INFO: common: created directory at: artifacts]
+[2024-05-19 13:09:37,377: INFO: common: created directory at: artifacts/data_ingestion]
+[2024-05-19 13:09:39,376: INFO: data_ingestion: >>>>>>>>>> AAPL.csv saved to artifacts <<<<<<<<]
+[2024-05-19 13:09:41,864: INFO: data_ingestion: >>>>>>>>>> MSFT.csv saved to artifacts <<<<<<<<]
+[2024-05-19 13:09:43,694: INFO: data_ingestion: >>>>>>>>>> AMZN.csv saved to artifacts <<<<<<<<]
+[2024-05-19 13:09:45,881: INFO: data_ingestion: >>>>>>>>>> GOOGL.csv saved to artifacts <<<<<<<<]
+[2024-05-19 13:09:49,089: INFO: data_ingestion: >>>>>>>>>> META.csv saved to artifacts <<<<<<<<]
+[2024-05-19 13:09:50,754: INFO: data_ingestion: >>>>>>>>>> BRK.B.csv saved to artifacts <<<<<<<<]
+[2024-05-19 13:09:52,348: INFO: data_ingestion: >>>>>>>>>> JNJ.csv saved to artifacts <<<<<<<<]
+[2024-05-19 13:09:54,183: INFO: data_ingestion: >>>>>>>>>> V.csv saved to artifacts <<<<<<<<]
+[2024-05-19 13:10:57,377: INFO: data_ingestion: >>>>>>>>>> PG.csv saved to artifacts <<<<<<<<]
+[2024-05-19 13:10:59,497: INFO: data_ingestion: >>>>>>>>>> JPM.csv saved to artifacts <<<<<<<<]
+[2024-05-19 13:11:01,630: INFO: data_ingestion: >>>>>>>>>> TSLA.csv saved to artifacts <<<<<<<<]
+[2024-05-19 13:11:03,318: INFO: data_ingestion: >>>>>>>>>> NVDA.csv saved to artifacts <<<<<<<<]
+[2024-05-19 13:11:04,783: INFO: data_ingestion: >>>>>>>>>> WMT.csv saved to artifacts <<<<<<<<]
+[2024-05-19 13:11:07,174: INFO: data_ingestion: >>>>>>>>>> DIS.csv saved to artifacts <<<<<<<<]
+[2024-05-19 13:11:09,620: INFO: data_ingestion: >>>>>>>>>> HD.csv saved to artifacts <<<<<<<<]
+[2024-05-19 13:11:11,617: INFO: data_ingestion: >>>>>>>>>> VZ.csv saved to artifacts <<<<<<<<]
+[2024-05-19 13:11:13,357: INFO: data_ingestion: >>>>>>>>>> KO.csv saved to artifacts <<<<<<<<]
+[2024-05-19 13:11:15,274: INFO: data_ingestion: >>>>>>>>>> PEP.csv saved to artifacts <<<<<<<<]
+[2024-05-19 13:11:17,346: INFO: data_ingestion: >>>>>>>>>> INTC.csv saved to artifacts <<<<<<<<]
+[2024-05-19 13:12:22,038: INFO: data_ingestion: >>>>>>>>>> PFE.csv saved to artifacts <<<<<<<<]
+[2024-05-19 13:12:22,038: INFO: stage_01_data_ingestion: >>>>>>>>>>>>> Data Ingestion stage completed <<<<<<<]
