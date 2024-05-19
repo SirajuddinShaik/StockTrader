@@ -1,1 +1,1 @@
-stock-agent
+stock_agent

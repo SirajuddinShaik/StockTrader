@@ -1,4 +1,4 @@
-import setuptools
+import setuptools # type: ignore
 
 with open("README.md", "r", encoding="utf-8") as f:
     long_description = f.read()
@@ -8,7 +8,7 @@ __version__ = "0.0.0"
 
 REPO_NAME = "StockTrader"
 AUTHOR_USER_NAME = "Sirajuddin"
-SRC_REPO = "stock-agent"
+SRC_REPO = "stock_agent"
 AUTHOR_EMAIL = "shaiksirajuddin9949@gmail.com"
 
 
