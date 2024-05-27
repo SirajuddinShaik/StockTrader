@@ -1,6 +1,9 @@
 from stock_agent.constants import *
 from stock_agent.utils.common import read_yaml, create_directories
-from stock_agent.entity.config_entity import (DataIngestionConfig)
+from stock_agent.entity.config_entity import (
+    DataIngestionConfig,
+    DataValidationConfig,
+    )
 
 class ConfigurationManager:
     def __init__(
@@ -29,4 +32,18 @@ class ConfigurationManager:
         )
 
         return data_ingestion_config
+    
+    def get_data_validation_config(self) -> DataValidationConfig:
+        config = self.config.data_validation
+
+        create_directories([config.root_dir])
+
+        data_validation_config = DataValidationConfig(
+            root_dir=config.root_dir,
+            data_dir=config.data_dir,
+            STATUS_FILE=config.STATUS_FILE,
+        )
+
+        return data_validation_config
+        
     

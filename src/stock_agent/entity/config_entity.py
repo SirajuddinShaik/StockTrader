@@ -8,3 +8,9 @@ class DataIngestionConfig:
     source_URL: str
     local_data_file: Path
 
+
+@dataclass(frozen=True)
+class DataValidationConfig:
+    root_dir: Path
+    data_dir: Path
+    STATUS_FILE: Path

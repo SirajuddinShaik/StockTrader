@@ -1,5 +1,7 @@
 from stock_agent import logger
+from stock_agent.constants import SYMBOLS_FILE_PATH
 from stock_agent.entity.config_entity import DataIngestionConfig
+from stock_agent.utils.common import get_symbols
 
 
 import requests
@@ -17,9 +19,7 @@ class DataIngestion:
 
     def download_new_data(self, interval = 30):
         uri_format = "https://api.twelvedata.com/time_series?apikey={api}&interval={interval}min&start_date={start_date}&end_date={end_date}&format=JSON&previous_close=true&symbol={symbol}"
-        f = open(self.config.source_URL)
-        symbols = list(map(str.strip, symbols))
-        symbols = f.readlines()
+        symbols = get_symbols(SYMBOLS_FILE_PATH)
         ll,ul = self.get_interval(5)
         for i in range(len(symbols)):
             uri = uri_format.format(api = os.environ["TWELVE_DATA_API"], interval = interval, start_date = ll, end_date = ul, symbol = symbols[i])

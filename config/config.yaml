@@ -5,3 +5,9 @@ data_ingestion:
   root_dir: artifacts/data_ingestion
   source_URL: src/stock_agent/components/stock_names.txt
   local_data_file: artifacts/data_ingestion/
+
+
+data_validation:
+  root_dir: artifacts/data_validation
+  data_dir: artifacts/data_ingestion
+  STATUS_FILE: artifacts/data_validation/status.txt

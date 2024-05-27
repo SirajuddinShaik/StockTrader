@@ -130,3 +130,12 @@ def setup_env():
     load_dotenv(find_dotenv())
 
 
+@ensure_annotations
+def get_symbols(path: Path) -> list:
+
+    f = open(path)
+    symbols = list(map(str.strip, symbols))
+    symbols = f.readlines()
+
+    return symbols
+
