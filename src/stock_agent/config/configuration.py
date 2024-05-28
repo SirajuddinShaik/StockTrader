@@ -4,6 +4,7 @@ from stock_agent.entity.config_entity import (
     DataIngestionConfig,
     DataTransformationConfig,
     DataValidationConfig,
+    ModelEvaluationConfig,
     ModelTrainerConfig,
     )
 
@@ -83,3 +84,17 @@ class ConfigurationManager:
             best_score_file=config.best_score_file,
         )
         return model_trainer_config
+
+    def get_model_evaluation_config(self) -> ModelEvaluationConfig:
+        config = self.config.model_evaluation
+
+        create_directories([config.root_dir])
+
+        model_eval_config = ModelEvaluationConfig(
+            root_dir=config.root_dir,
+            data_dir=config.data_dir,
+            best_score_file=config.best_score_file,
+            history_len=config.history_len,
+            model=config.model,
+        )
+        return model_eval_config

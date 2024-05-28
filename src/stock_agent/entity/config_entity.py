@@ -36,3 +36,11 @@ class ModelTrainerConfig:
     re_train: bool
     epochs: int
     best_score_file: Path
+
+@dataclass(frozen=True)
+class ModelEvaluationConfig:
+    root_dir: Path
+    data_dir: Path
+    best_score_file: Path
+    history_len : int
+    model: Path

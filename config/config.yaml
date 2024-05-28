@@ -32,3 +32,10 @@ model_trainer:
   re_train: False
   epochs: 1
   best_score_file: artifacts/model_trainer/best_score.txt
+
+model_evaluation:
+  root_dir: artifacts/model_evaluation
+  data_dir: artifacts/data_transformation/test.csv
+  best_score_file: artifacts/model_trainer/best_score.txt
+  history_len: 10
+  model: artifacts/model_trainer/actor.h5 
