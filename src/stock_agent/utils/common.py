@@ -10,6 +10,8 @@ from pathlib import Path
 from typing import Any
 from dotenv import load_dotenv,find_dotenv
 
+from stock_agent.constants import SYMBOLS_FILE_PATH
+
 
 
 @ensure_annotations
@@ -131,11 +133,11 @@ def setup_env():
 
 
 @ensure_annotations
-def get_symbols(path: Path) -> list:
-
+def get_symbols() -> list:
+    path = SYMBOLS_FILE_PATH
     f = open(path)
-    symbols = list(map(str.strip, symbols))
     symbols = f.readlines()
+    symbols = list(map(str.strip, symbols))
 
     return symbols
 

@@ -2,6 +2,7 @@ from stock_agent.constants import *
 from stock_agent.utils.common import read_yaml, create_directories
 from stock_agent.entity.config_entity import (
     DataIngestionConfig,
+    DataTransformationConfig,
     DataValidationConfig,
     )
 
@@ -45,5 +46,17 @@ class ConfigurationManager:
         )
 
         return data_validation_config
-        
     
+    def get_data_transformation_config(self) -> DataTransformationConfig:
+        config = self.config.data_transformation
+
+        create_directories([config.root_dir])
+
+        data_transformation_config = DataTransformationConfig(
+            root_dir=config.root_dir,
+            data_dir=config.data_dir,
+            file_name=config.file_name,
+        )
+
+        return data_transformation_config
+

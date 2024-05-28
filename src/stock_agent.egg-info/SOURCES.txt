@@ -8,6 +8,8 @@ src/stock_agent.egg-info/dependency_links.txt
 src/stock_agent.egg-info/top_level.txt
 src/stock_agent/components/__init__.py
 src/stock_agent/components/data_ingestion.py
+src/stock_agent/components/data_transformation.py
+src/stock_agent/components/data_validation.py
 src/stock_agent/config/__init__.py
 src/stock_agent/config/configuration.py
 src/stock_agent/constants/__init__.py
@@ -15,5 +17,7 @@ src/stock_agent/entity/__init__.py
 src/stock_agent/entity/config_entity.py
 src/stock_agent/pipeline/__init__.py
 src/stock_agent/pipeline/stage_01_data_ingestion.py
+src/stock_agent/pipeline/stage_02_data_validation.py
+src/stock_agent/pipeline/stage_03_data_transformation.py
 src/stock_agent/utils/__init__.py
 src/stock_agent/utils/common.py

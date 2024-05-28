@@ -11,3 +11,9 @@ data_validation:
   root_dir: artifacts/data_validation
   data_dir: artifacts/data_ingestion
   STATUS_FILE: artifacts/data_validation/status.txt
+
+
+data_transformation:
+  root_dir: artifacts/data_transformation
+  data_dir: artifacts/data_ingestion
+  file_name: all_stocks.csv
