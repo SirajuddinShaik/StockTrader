@@ -53,6 +53,23 @@ def create_directories(path_to_directories: list, verbose=True):
         if verbose:
             logger.info(f"created directory at: {path}")
 
+@ensure_annotations
+def create_files(list_of_files: list, verbose=True):
+        
+    for filepath in list_of_files:
+        filepath = Path(filepath)
+        filedir, filename = os.path.split(filepath)
+
+        if filedir !="":
+            os.makedirs(filedir, exist_ok=True)
+            logger.info(f"Creating directory; {filedir} for the file: {filename}")
+        if (not os.path.exists(filepath)) or (os.path.getsize(filepath) == 0):
+            with open(filepath, "w") as f:
+                pass
+                logger.info(f"Creating empty file: {filepath}")
+
+        else:
+            logger.info(f"{filename} is already exists")
 
 @ensure_annotations
 def save_json(path: Path, data: dict):

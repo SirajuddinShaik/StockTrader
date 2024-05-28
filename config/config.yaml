@@ -17,3 +17,18 @@ data_transformation:
   root_dir: artifacts/data_transformation
   data_dir: artifacts/data_ingestion
   file_name: all_stocks.csv
+
+
+model_trainer:
+  root_dir: artifacts/model_trainer
+  data_dir: artifacts/data_transformation/train.csv
+  alpha: 0.001
+  beta: 0.002
+  gamma: 0.99
+  max_size: 250
+  tau: 0.005
+  batch_size: 64
+  history_len: 10
+  re_train: False
+  epochs: 1
+  best_score_file: artifacts/model_trainer/best_score.txt

@@ -1,9 +1,10 @@
 from stock_agent.constants import *
-from stock_agent.utils.common import read_yaml, create_directories
+from stock_agent.utils.common import create_files, read_yaml, create_directories
 from stock_agent.entity.config_entity import (
     DataIngestionConfig,
     DataTransformationConfig,
     DataValidationConfig,
+    ModelTrainerConfig,
     )
 
 class ConfigurationManager:
@@ -60,3 +61,25 @@ class ConfigurationManager:
 
         return data_transformation_config
 
+    
+    def get_model_trainer_config(self) -> ModelTrainerConfig:
+        config = self.config.model_trainer
+
+        create_directories([config.root_dir])
+        create_files([config.best_score_file])
+
+        model_trainer_config = ModelTrainerConfig(
+            root_dir=config.root_dir,
+            data_dir=config.data_dir,
+            alpha=config.alpha,
+            beta=config.beta,
+            gamma=config.gamma,
+            max_size=config.max_size,
+            tau=config.tau,
+            batch_size=config.batch_size,
+            history_len=config.history_len,
+            re_train=config.re_train,
+            epochs=config.epochs,
+            best_score_file=config.best_score_file,
+        )
+        return model_trainer_config

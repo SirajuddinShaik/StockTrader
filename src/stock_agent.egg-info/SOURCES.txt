@@ -10,6 +10,7 @@ src/stock_agent/components/__init__.py
 src/stock_agent/components/data_ingestion.py
 src/stock_agent/components/data_transformation.py
 src/stock_agent/components/data_validation.py
+src/stock_agent/components/model_trainer.py
 src/stock_agent/config/__init__.py
 src/stock_agent/config/configuration.py
 src/stock_agent/constants/__init__.py
@@ -19,5 +20,6 @@ src/stock_agent/pipeline/__init__.py
 src/stock_agent/pipeline/stage_01_data_ingestion.py
 src/stock_agent/pipeline/stage_02_data_validation.py
 src/stock_agent/pipeline/stage_03_data_transformation.py
+src/stock_agent/pipeline/stage_04_model_trainer.py
 src/stock_agent/utils/__init__.py
 src/stock_agent/utils/common.py
