@@ -9218,3 +9218,7 @@ bson.errors.InvalidDocument: cannot encode object: 33, of type: <class 'numpy.in
 [2024-05-31 23:47:22,250: WARNING: _internal:  * Debugger is active!]
 [2024-05-31 23:47:22,281: INFO: _internal:  * Debugger PIN: 137-557-231]
 [2024-05-31 23:48:44,152: INFO: _internal:  * Detected change in 'c:\\Users\\shaik\\Desktop\\Docker\\StockTrader\\app.py', reloading]
+[2024-05-31 23:48:45,200: INFO: _internal:  * Restarting with stat]
+[2024-05-31 23:48:56,788: INFO: logger: {"message": "Waiting for suitable server to become available", "selector": "Primary()", "operation": "count", "topologyDescription": "<TopologyDescription id: 665a149042e1fab4b03bdc16, topology_type: ReplicaSetNoPrimary, servers: [<ServerDescription ('ac-qmnt91n-shard-00-00.acdf1pn.mongodb.net', 27017) server_type: Unknown, rtt: None>, <ServerDescription ('ac-qmnt91n-shard-00-01.acdf1pn.mongodb.net', 27017) server_type: Unknown, rtt: None>, <ServerDescription ('ac-qmnt91n-shard-00-02.acdf1pn.mongodb.net', 27017) server_type: Unknown, rtt: None>]>", "clientId": {"$oid": "665a149042e1fab4b03bdc16"}, "remainingTimeMS": 30}]
+[2024-05-31 23:48:58,311: INFO: base: Scheduler started]
+[2024-05-31 23:48:58,320: INFO: base: Added job "update" to job store "default"]
