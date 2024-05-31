@@ -6,6 +6,13 @@ def wrapped_tf_fn(x):
     # Perform the transpose operation
     return tf.transpose(x, perm=[0, 2, 1])
 
+def wrapped_argmax(x):
+    # Apply tf.math.argmax along the last axis
+    return tf.math.argmax(x, axis=-1)
+def wrapped_cast(x):
+    # Cast the argmax result to float32
+    return tf.cast(x, dtype=tf.float32)
+
 def create_actor_model_3(input_shape, dropout_rate=0.2):
     state_input = Input(shape=input_shape)
     x = Dense(256)(state_input)
@@ -26,8 +33,12 @@ def create_actor_model_3(input_shape, dropout_rate=0.2):
     # out2 = tf.transpose(out1,perm=[0,2,1])
     out2 = Lambda(wrapped_tf_fn)(out1)
     out2 = Dense(20,activation="softmax")(out2[:,:2])
-    argmax = tf.math.argmax(out1,axis=-1)
-    argmax = tf.cast(argmax,dtype=tf.float32)
+    # argmax = tf.math.argmax(out1,axis=-1)    
+    argmax = Lambda(wrapped_argmax)(out1)  # Apply argmax function
+
+    # argmax = tf.cast(argmax,dtype=tf.float32)
+    argmax = Lambda(wrapped_cast)(argmax)  # Cast to float32
+
     outputs = Concatenate(axis=1)([tf.expand_dims(argmax, -2),out2])
     model = Model(inputs=state_input, outputs=outputs)
     return model

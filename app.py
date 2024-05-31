@@ -70,6 +70,9 @@ def update(address):
     elif address == "setenv":
         manager.set_account_state(env)
         return jsonify({"status": "success"})
+    elif address == "price":
+        manager.get_curr_prices()
+        return jsonify({"status": "success"})
     else:
         return jsonify({"status": "invalid"})
 
@@ -162,4 +165,6 @@ if __name__ == "__main__":
     # Initialize StockTransactionManager
     
     # manager.get_curr_prices()
-    app.run(debug=True)
+    # app.run(debug=True)
+    app.run(host='0.0.0.0', port=80)
+
