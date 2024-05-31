@@ -12,6 +12,9 @@ def wrapped_argmax(x):
 def wrapped_cast(x):
     # Cast the argmax result to float32
     return tf.cast(x, dtype=tf.float32)
+def wrapped_expand_dims(x):
+    # Expand the dimensions of argmax result
+    return tf.expand_dims(x, axis=-2)
 
 def create_actor_model_3(input_shape, dropout_rate=0.2):
     state_input = Input(shape=input_shape)
@@ -38,8 +41,9 @@ def create_actor_model_3(input_shape, dropout_rate=0.2):
 
     # argmax = tf.cast(argmax,dtype=tf.float32)
     argmax = Lambda(wrapped_cast)(argmax)  # Cast to float32
+    expanded = Lambda(wrapped_expand_dims)(argmax)  # Expand dimensions
 
-    outputs = Concatenate(axis=1)([tf.expand_dims(argmax, -2),out2])
+    outputs = Concatenate(axis=1)([expanded,out2])
     model = Model(inputs=state_input, outputs=outputs)
     return model
 
