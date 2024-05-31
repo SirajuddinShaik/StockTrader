@@ -1,10 +1,18 @@
 requests
 pandas
 scikit-learn
-
-
-
-
-
-
+Flask
+APScheduler
+Flask-APScheduler
+tensorflow
+numpy
+pymongo
+requests
+python-box==6.0.2
+pyYAML
+tqdm
+ensure==1.0.2
+python-dotenv
+joblib
+types-PyYAML
 -e .

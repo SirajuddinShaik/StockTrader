@@ -34,3 +34,4 @@ class ModelEvaluation:
         avg_reward = np.mean(rewards)
         logger.info(f">>>>>>>>> Avg Reward: {avg_reward} <<<<<<<<<<")
         logger.info(self.env.render())
+        return self.env

@@ -61,7 +61,7 @@ class DataTransformation:
         data = pd.read_csv(os.path.join(self.config.root_dir, self.config.file_name))
 
         # Split the data into training and test sets. (0.75, 0.25) split.
-        train, test = train_test_split(data)
+        train, test = train_test_split(data,shuffle=False)
 
         train.to_csv(os.path.join(self.config.root_dir, "train.csv"),index = False)
         test.to_csv(os.path.join(self.config.root_dir, "test.csv"),index = False)

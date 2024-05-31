@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stock Trading Dashboard</title>
+    <link rel="stylesheet" href="/static/css/styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Stock Trading Dashboard</h1>
+        </header>
+        <div class="main-content">
+            <section class="portfolio">
+                <h2>Portfolio</h2>
+                <div class="portfolio-value">
+                    <span>Portfolio Value: </span> <span id="portfolio-value">0</span>
+                </div>
+                <div class="profit-loss">
+                    <span>Profit/Loss: </span> <span id="profit-loss">0</span>
+                </div>
+                <div class="account-cash">
+                    <span>Cash: </span> <span id="account-cash">0</span>
+                </div>
+            </section>
+            <section class="stocks">
+                <h2>Stocks</h2>
+                <div class="stocks-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Stock Name</th>
+                                <th>Current Price</th>
+                                <th>Quantity</th>
+                            </tr>
+                        </thead>
+                        <tbody id="stocks-table-body">
+                            <!-- Stock data will be inserted here dynamically -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+            <section class="transactions">
+                <h2>Transactions</h2>
+                <form action="/api/transaction" id="transaction-form" method="get">
+                    <div class="form-group">
+                        <label for="transaction-type">Transaction Type:</label>
+                        <select id="transaction-type" name="transaction_type">
+                            <option value="buy">Buy</option>
+                            <option value="sell">Sell</option>
+                            <option value="deposit">Deposit</option>
+                            <option value="withdraw">Withdraw</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="stock-id">Stock ID:</label>
+                        <select id="stock-type" name="stock_id">
+                                <option value="0">None</option>
+                                <option value="1">AAPL</option>
+                                <option value="2">MSFT</option>
+                                <option value="3">AMZN</option>
+                                <option value="4">GOOGL</option>
+                                <option value="5">META</option>
+                                <option value="6">BRK.B</option>
+                                <option value="7">JNJ</option>
+                                <option value="8">V</option>
+                                <option value="9">PG</option>
+                                <option value="10">JPM</option>
+                                <option value="11">TSLA</option>
+                                <option value="12">NVDA</option>
+                                <option value="13">WMT</option>
+                                <option value="14">DIS</option>
+                                <option value="15">HD</option>
+                                <option value="16">VZ</option>
+                                <option value="17">KO</option>
+                                <option value="18">PEP</option>
+                                <option value="19">INTC</option>
+                                <option value="20">PFE</option>
+                            </select>
+                            
+                    </div>
+                    <div class="form-group">
+                        <label for="count">Count / Price:</label>
+                        <input type="number" id="count" name="amount">
+                    </div>
+                    <div class="form-group">
+                        <label for="security-key">Security Key:</label>
+                        <input type="text" id="security-key" name="security_key">
+                    </div>
+                    <div class="form-group">
+                        <button type="submit">Submit</button>
+                    </div>
+                </form>
+            </section>
+            <section class="transaction-history">
+                <h2>Last 10 Transactions</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Transaction Type</th>
+                            <th>Stock ID</th>
+                            <th>Quantity</th>
+                            <th>Price</th>
+                            <th>Total Tax</th>
+                            <th>Message</th>
+                        </tr>
+                    </thead>
+                    <tbody id="transaction-history">
+                        <!-- Stock data will be inserted here dynamically -->
+                    </tbody>
+                </table>
+            </section>
+        </div>
+    </div>
+    <script src="/static/js/scripts.js"></script>
+</body>
+</html>

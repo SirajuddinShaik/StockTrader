@@ -13,7 +13,7 @@ class ModelEvaluationTrainingPipeline:
 
         model_evaluation_config = config.get_model_evaluation_config()
         model_evaluation = ModelEvaluation(model_evaluation_config)
-        model_evaluation.eval()
+        return model_evaluation.eval()
 
 
 if __name__ == "__main__":
