@@ -8856,3 +8856,15 @@ Traceback (most recent call last):
     return _op_msg_uncompressed(flags, command, identifier, docs, opts)
            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 bson.errors.InvalidDocument: cannot encode object: 33, of type: <class 'numpy.int16'>
+[2024-05-31 23:04:06,759: INFO: logger: {"message": "Waiting for suitable server to become available", "selector": "Primary()", "operation": "count", "topologyDescription": "<TopologyDescription id: 665a0a0eaf8480e83f8bebd9, topology_type: ReplicaSetNoPrimary, servers: [<ServerDescription ('ac-qmnt91n-shard-00-00.acdf1pn.mongodb.net', 27017) server_type: Unknown, rtt: None>, <ServerDescription ('ac-qmnt91n-shard-00-01.acdf1pn.mongodb.net', 27017) server_type: Unknown, rtt: None>, <ServerDescription ('ac-qmnt91n-shard-00-02.acdf1pn.mongodb.net', 27017) server_type: Unknown, rtt: None>]>", "clientId": {"$oid": "665a0a0eaf8480e83f8bebd9"}, "remainingTimeMS": 30}]
+[2024-05-31 23:04:09,457: INFO: base: Scheduler started]
+[2024-05-31 23:04:09,461: INFO: base: Added job "update" to job store "default"]
+[2024-05-31 23:04:09,504: INFO: _internal: [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000]
+[2024-05-31 23:04:09,506: INFO: _internal: [33mPress CTRL+C to quit[0m]
+[2024-05-31 23:04:09,515: INFO: _internal:  * Restarting with stat]
+[2024-05-31 23:04:18,101: INFO: logger: {"message": "Waiting for suitable server to become available", "selector": "Primary()", "operation": "count", "topologyDescription": "<TopologyDescription id: 665a0a1a8a29b465a70c9d0d, topology_type: ReplicaSetNoPrimary, servers: [<ServerDescription ('ac-qmnt91n-shard-00-00.acdf1pn.mongodb.net', 27017) server_type: Unknown, rtt: None>, <ServerDescription ('ac-qmnt91n-shard-00-01.acdf1pn.mongodb.net', 27017) server_type: Unknown, rtt: None>, <ServerDescription ('ac-qmnt91n-shard-00-02.acdf1pn.mongodb.net', 27017) server_type: Unknown, rtt: None>]>", "clientId": {"$oid": "665a0a1a8a29b465a70c9d0d"}, "remainingTimeMS": 30}]
+[2024-05-31 23:04:19,217: INFO: base: Scheduler started]
+[2024-05-31 23:04:19,217: INFO: base: Added job "update" to job store "default"]
+[2024-05-31 23:04:19,241: WARNING: _internal:  * Debugger is active!]
+[2024-05-31 23:04:19,251: INFO: _internal:  * Debugger PIN: 137-557-231]
