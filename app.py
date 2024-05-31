@@ -61,13 +61,13 @@ def get_cash():
 @app.route("/9949/<address>")
 def update(address):
     if address == "run":
-        env.update(manager, updater)
+        env.update()
         print(env.cash)
         return jsonify({"status": "success"})
     elif address == "update":
         manager.update_account_state(env)
         return jsonify({"status": "success"})
-    elif address == "save":
+    elif address == "setenv":
         manager.set_account_state(env)
         return jsonify({"status": "success"})
     else:

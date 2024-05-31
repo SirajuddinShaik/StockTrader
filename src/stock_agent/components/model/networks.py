@@ -1,6 +1,10 @@
 import tensorflow as tf
 from tensorflow.keras import Model, Input # type: ignore
-from tensorflow.keras.layers import Dense, Dropout, Flatten, Conv1D, Concatenate # type: ignore
+from tensorflow.keras.layers import Dense, Dropout, Flatten, Conv1D, Concatenate, Lambda # type: ignore
+
+def wrapped_tf_fn(x):
+    # Perform the transpose operation
+    return tf.transpose(x, perm=[0, 2, 1])
 
 def create_actor_model_3(input_shape, dropout_rate=0.2):
     state_input = Input(shape=input_shape)
@@ -16,9 +20,11 @@ def create_actor_model_3(input_shape, dropout_rate=0.2):
     x = Dropout(dropout_rate)(x)
     x = Dense(20, activation='relu')(x)
     x = Dense(20, activation='relu')(x)
-    out = tf.transpose(x,perm=[0,2,1])
+    # out = tf.transpose(x,perm=[0,2,1])
+    out = Lambda(wrapped_tf_fn)(x)
     out1 = Dense(3, activation='softmax')(out)
-    out2 = tf.transpose(out1,perm=[0,2,1])
+    # out2 = tf.transpose(out1,perm=[0,2,1])
+    out2 = Lambda(wrapped_tf_fn)(out1)
     out2 = Dense(20,activation="softmax")(out2[:,:2])
     argmax = tf.math.argmax(out1,axis=-1)
     argmax = tf.cast(argmax,dtype=tf.float32)
