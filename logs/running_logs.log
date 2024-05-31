@@ -9188,3 +9188,4 @@ bson.errors.InvalidDocument: cannot encode object: 33, of type: <class 'numpy.in
 [2024-05-31 23:39:59,117: INFO: _internal: 127.0.0.1 - - [31/May/2024 23:39:59] "GET /api/transactions HTTP/1.1" 200 -]
 [2024-05-31 23:39:59,229: INFO: _internal: 127.0.0.1 - - [31/May/2024 23:39:59] "GET /api/get_stock_data HTTP/1.1" 200 -]
 [2024-05-31 23:41:02,967: INFO: _internal:  * Detected change in 'c:\\Users\\shaik\\Desktop\\Docker\\StockTrader\\app.py', reloading]
+[2024-05-31 23:41:04,248: INFO: _internal:  * Restarting with stat]
