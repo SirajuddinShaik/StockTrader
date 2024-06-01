@@ -156,7 +156,7 @@ def update():
         updater.update(np.array(components))
         action = np.squeeze(actor(np.expand_dims(env.get_observation(),0)))
         env.step(action)
-        manager.update_account_sate(env.stocks, env.portfolio_value, env.initial_cash, env.cash)
+        manager.update_account_sate(env)
         print(env.render())
 
 @scheduler.task('interval', id='inactive', seconds=(10))
