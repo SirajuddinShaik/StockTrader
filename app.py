@@ -59,6 +59,7 @@ def get_profit():
 def get_cash():
     cash = env.cash
     return jsonify(cash)
+
 @app.route(f'/{security_key}')
 @app.route(f"/{security_key}/<address>")
 def update(address):
@@ -83,6 +84,34 @@ def update(address):
 
 
 
+@app.route('/api/all_data')
+def get_all_data():
+    account_state = manager.get_account_state()
+    portfolio = env.portfolio_value
+    profit = env.portfolio_value - env.initial_cash
+    cash = env.cash
+    investment = env.initial_cash
+    last_prediction = account_state.get("last_pred_time_stamp", "")
+    start_date = account_state.get("start_time_stamp", "")
+    transactions = manager.get_last_10_transactions()
+    stocks = account_state.get("stocks", {})
+
+    data = {
+        "portfolio": portfolio,
+        "profit": profit,
+        "cash": cash,
+        "investment": investment,
+        "lastPrediction": last_prediction,
+        "startDate": start_date,
+        "transactions": transactions,
+        "stocks": stocks
+    }
+    return jsonify(data)
+
+
+
+
+
         
 
 @app.route('/api/new_data')
@@ -90,25 +119,9 @@ def get_curr_prices():
     data = {"data": manager.get_curr_prices()}
     return jsonify(data)
 
-# Route to fetch last 10 transactions
-@app.route('/api/transactions')
-def get_transactions():
-    transactions = manager.get_last_10_transactions()
-    return jsonify(transactions)
 
-# Route to handle buy transactions
-@app.route('/api/buy', methods=['POST'])
-def buy_stock():
-    data = request.json
-    stock_id = int(data['stock_id'])
-    count = int(data['count'])
-    price = float(data['price'])
-    total_tax = data['total_tax']
-    manager.buy_stock(stock_id, count, price, total_tax)
-    return jsonify({"status": "success"})
 
-# Route to handle sell transactions
-@app.route('/api/transaction', methods=['GET'])
+@app.route('/api/transaction', methods=['POST'])
 def transaction():
     data = request.args.to_dict()
     security_key = data["security_key"]
@@ -132,21 +145,6 @@ def transaction():
     
     return jsonify({"status": "success"})
 
-# Route to handle deposit transactions
-@app.route('/api/deposit', methods=['POST'])
-def deposit_cash():
-    data = request.json
-    amount = data['amount']
-    manager.deposit_cash(amount)
-    return jsonify({"status": "success"})
-
-# Route to handle withdraw transactions
-@app.route('/api/withdraw', methods=['POST'])
-def withdraw_cash():
-    data = request.json
-    amount = data['amount']
-    manager.withdraw_cash(amount)
-    return jsonify({"status": "success"})
 
 @scheduler.task('interval', id='update_stocks', seconds=(60*60*4))
 def update():
@@ -155,8 +153,9 @@ def update():
         print(manager.prices)
         updater.update(np.array(components))
         action = np.squeeze(actor(np.expand_dims(env.get_observation(),0)))
+        print(action)
         env.step(action)
-        manager.update_account_sate(env)
+        manager.update_account_state(env)
         print(env.render())
 
 @scheduler.task('interval', id='inactive', seconds=(10))
@@ -174,7 +173,7 @@ def update_env(env):
 if __name__ == "__main__":
     # Initialize StockTransactionManager
     
-    manager.get_curr_prices()
+    # manager.get_curr_prices()
     # app.run(debug=True)
     manager.set_account_state(env)
     env.update_portfolio_1()

@@ -37,6 +37,8 @@ class StockTransactionManager:
         return self.account_collection.find_one({"_id": "9949"})
 
     def update_account_state(self, env:DeploymentStockMarketEnv):
+        time_step = datetime.now()
+        time_step = time_step.strftime("%d-%m-%Y %H:%M:%S")
         self.account_collection.update_one({"_id": "9949"},{"$set":{
                 "stocks": {self.symbols[i]: {"quantity": int(env.stocks[i]), "current_price": self.prices[i]} for i in range(20)},
                 "portfolio": env.portfolio_value,
@@ -49,6 +51,7 @@ class StockTransactionManager:
                 "data" : [i.tolist() for i in env.data],
                 "current_step" : env.current_step,
                 "prices" : self.prices,
+                "last_pred_time_stamp" : time_step,
             }})
     
     def set_account_state(self, env:DeploymentStockMarketEnv):

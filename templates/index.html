@@ -13,17 +13,29 @@
         </header>
         <div class="main-content">
             <section class="portfolio">
+                <div class="start-date">
+                    <span>Start Date: </span> <span id="start-date">N/A</span>
+                </div>
+                <div class="last-prediction-date">
+                    <span>Last Prediction Date: </span> <span id="last-prediction-date">N/A</span>
+                </div>
                 <h2>Portfolio</h2>
-                <div class="portfolio-value">
-                    <span>Portfolio Value: </span> <span id="portfolio-value">0</span>
-                </div>
-                <div class="profit-loss">
-                    <span>Profit/Loss: </span> <span id="profit-loss">0</span>
-                </div>
-                <div class="account-cash">
-                    <span>Cash: </span> <span id="account-cash">0</span>
+                <div class="portfolio-info">
+                    <div class="portfolio-value">
+                        <span>Portfolio Value: </span> <span id="portfolio-value">0</span>
+                    </div>
+                    <div class="investment">
+                        <span>Investment: </span> <span id="investment">0</span>
+                    </div></div></br>
+                    <div class="profit-loss">
+                        <span>Profit/Loss: </span> <span id="profit-loss">0</span>
+                    </div>
+                    <div class="account-cash">
+                        <span>Cash: </span> <span id="account-cash">0</span>
+                    </div>
                 </div>
             </section>
+            
             <section class="stocks">
                 <h2>Stocks</h2>
                 <div class="stocks-table">
@@ -43,7 +55,7 @@
             </section>
             <section class="transactions">
                 <h2>Transactions</h2>
-                <form action="/api/transaction" id="transaction-form" method="get">
+                <form action="/api/transaction" id="transaction-form" method="post">
                     <div class="form-group">
                         <label for="transaction-type">Transaction Type:</label>
                         <select id="transaction-type" name="transaction_type">
