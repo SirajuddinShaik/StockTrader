@@ -37,8 +37,9 @@ document.addEventListener("DOMContentLoaded", function() {
                         <td><strong>${transaction.type.toUpperCase()}</strong></td> 
                         <td>${transaction.stock}</td>
                         <td>${transaction.quantity}</td>
-                        <td>$${transaction.price}</td>
-                        <td>$${transaction.total_tax}</td>
+                        <td>$${transaction.price.toFixed(2)}</td>
+                        <td>$${transaction.total_tax.toFixed(2)}</td>
+                        <td>$${transaction.time_step}</td>
                         <td>${transaction.message.toUpperCase()}</td>
                     `;
                     transactionHistoryList.appendChild(row);
