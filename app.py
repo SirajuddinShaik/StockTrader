@@ -3,6 +3,7 @@ from pathlib import Path
 from flask_apscheduler import APScheduler
 from flask import Flask, jsonify, request, render_template
 import numpy as np
+import requests
 
 
 from src.mongo_db.database import StockTransactionManager
@@ -20,6 +21,7 @@ app = Flask(__name__)
 setup_env()
 app.config.from_object(Config)
 db_api = os.environ["mongo_db"]
+security_key = os.environ["security_key"]
 manager = StockTransactionManager(f"mongodb+srv://{db_api}@cluster0.acdf1pn.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0", "stock_db")
 # manager = StockTransactionManager("mongodb://localhost:27017/?retryWrites=false&serverSelectionTimeoutMS=5000&connectTimeoutMS=10000", "stock_db")
 updater = Updater()
@@ -57,8 +59,8 @@ def get_profit():
 def get_cash():
     cash = env.cash
     return jsonify(cash)
-@app.route('/9949')
-@app.route("/9949/<address>")
+@app.route(f'/{security_key}')
+@app.route(f"/{security_key}/<address>")
 def update(address):
     if address == "run":
         env.update()
@@ -110,7 +112,7 @@ def transaction():
     amount = int(data["amount"])
     stock_id = int(data["stock_id"])
     transaction_type = data["transaction_type"]
-    if security_key == "9949":
+    if security_key == security_key:
         status = True
     else:
         status = False
@@ -154,6 +156,11 @@ def update():
         manager.update_account_sate(env.stocks, env.portfolio_value, env.initial_cash, env.cash)
         print(env.render())
 
+@scheduler.task('interval', id='inactive', seconds=(10))
+def request_site():
+    uri = "https://stocktrader-6dv1.onrender.com/api/cash"
+    response = requests.get(uri).json()
+
 def update_env(env):
     obj = ModelEvaluationTrainingPipeline()
     env = obj.main()
@@ -164,7 +171,9 @@ def update_env(env):
 if __name__ == "__main__":
     # Initialize StockTransactionManager
     
-    # manager.get_curr_prices()
+    manager.get_curr_prices()
     # app.run(debug=True)
+    manager.set_account_state(env)
+    env.update_portfolio()
     app.run(host='0.0.0.0', port=80)
 

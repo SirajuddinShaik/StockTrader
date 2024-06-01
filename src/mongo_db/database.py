@@ -20,7 +20,7 @@ class StockTransactionManager:
         self.api_key1 = os.environ["TWELVE_DATA_API"]
         self.api_key2 = os.environ["TWELVE_DATA_API2"]
         self.symbols = get_symbols()
-        self.prices = np.zeros((20))
+        self.prices = [0]*20
 
         # Initialize the account if not exists
         if self.account_collection.count_documents({}) == 0:
@@ -48,6 +48,7 @@ class StockTransactionManager:
                 "previous_portfolio_value" : env.previous_portfolio_value,
                 "data" : [i.tolist() for i in env.data],
                 "current_step" : env.current_step,
+                "prices" : self.prices,
             }})
     
     def set_account_state(self, env:DeploymentStockMarketEnv):
@@ -63,6 +64,7 @@ class StockTransactionManager:
             env.previous_portfolio_value = account_state.get("previous_portfolio_value", 0)
             env.data = [np.array(data) for data in account_state.get("data", [])]
             env.current_step = account_state.get("current_step", 0)
+            self.prices = account_state.get("prices", [0]*20)
     
     def transaction(self, type, stock, quantity, price, total_tax, message):
         self.transactions_collection.insert_one({

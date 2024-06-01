@@ -192,4 +192,8 @@ class DeploymentStockMarketEnv:
         self.data = env.data
         self.current_step = env.current_step
         self.manager.update_account_state(self)
+    
+    def update_portfolio(self):
+        self.portfolio_value = self.cash + np.sum(self.stocks * np.array(self.manager.prices))
+
 
