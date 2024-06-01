@@ -177,6 +177,6 @@ if __name__ == "__main__":
     manager.get_curr_prices()
     # app.run(debug=True)
     manager.set_account_state(env)
-    env.update_portfolio()
+    env.update_portfolio_1()
     app.run(host='0.0.0.0', port=80)
 
