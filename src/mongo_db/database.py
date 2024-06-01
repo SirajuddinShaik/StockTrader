@@ -131,7 +131,8 @@ class StockTransactionManager:
             return False
 # Example usage
 if __name__ == "__main__":
-    CONNECTION_STRING = "mongodb+srv://stocks:stocks9949@cluster0.acdf1pn.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
+    api_key = os.environ["mongo_db"]
+    CONNECTION_STRING = f"mongodb+srv://{api_key}@cluster0.acdf1pn.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
     DB_NAME = "stock_db"
 
     manager = StockTransactionManager("mongodb://localhost:27017/?retryWrites=false&serverSelectionTimeoutMS=5000&connectTimeoutMS=10000", "stock_db")
