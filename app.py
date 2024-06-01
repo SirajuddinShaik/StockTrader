@@ -123,12 +123,12 @@ def get_curr_prices():
 
 @app.route('/api/transaction', methods=['POST'])
 def transaction():
-    data = request.args.to_dict()
-    security_key = data["security_key"]
+    data = request.form.to_dict()
+    security_key_1 = data["security_key"]
     amount = int(data["amount"])
     stock_id = int(data["stock_id"])
     transaction_type = data["transaction_type"]
-    if security_key == security_key:
+    if security_key_1 == security_key:
         status = True
     else:
         status = False
