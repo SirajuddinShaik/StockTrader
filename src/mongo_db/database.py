@@ -43,7 +43,7 @@ class StockTransactionManager:
                 "investment" : env.initial_cash,
                 "min_balance" : env.min_balance,
                 "cash" : env.cash,
-                "self.num_stocks" :env.num_stocks,
+                "num_stocks" :env.num_stocks,
                 "h_l" : env.h_l,
                 "previous_portfolio_value" : env.previous_portfolio_value,
                 "data" : [i.tolist() for i in env.data],
