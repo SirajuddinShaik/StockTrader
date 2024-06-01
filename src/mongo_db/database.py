@@ -19,6 +19,7 @@ class StockTransactionManager:
         self.account_collection = self.db['account']
         self.api_key1 = os.environ["TWELVE_DATA_API"]
         self.api_key2 = os.environ["TWELVE_DATA_API2"]
+        self.api_key3 = os.environ["TWELVE_DATA_API3"]
         self.symbols = get_symbols()
         self.prices = [0]*20
 
@@ -111,6 +112,9 @@ class StockTransactionManager:
                 response = requests.get(uri).json()
                 if response["status"] == "error":
                     uri = f"https://api.twelvedata.com/time_series?apikey={self.api_key2}&interval=1min&format=JSON&outputsize=1&type=stock&symbol={symbol}&end_date={dt_str}"
+                    response = requests.get(uri).json()
+                if response["status"] == "error":
+                    uri = f"https://api.twelvedata.com/time_series?apikey={self.api_key3}&interval=1min&format=JSON&outputsize=1&type=stock&symbol={symbol}&end_date={dt_str}"
                     response = requests.get(uri).json()
                 if response["status"] == "error":
                     time.sleep(61)

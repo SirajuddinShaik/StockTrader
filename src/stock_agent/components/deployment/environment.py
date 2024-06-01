@@ -61,17 +61,18 @@ class DeploymentStockMarketEnv:
                 stock_price = 1e-8
             if action_arr[i] == 1:  # Sell
                 quantity = sell_stocks[i]
-                revenue = quantity * stock_price
-                self.stocks[i] -= quantity
-                brokerage = 20
-                stt = 0.1 / 100 * revenue
-                transaction_charge = 0.00325 / 100 * revenue
-                gst = 18 / 100 * brokerage
-                sebi_fee = 0.0001 / 100 * revenue
-                stamp_duty = 0.015 / 100 * revenue
-                total_cost = brokerage + stt + transaction_charge + gst + sebi_fee + stamp_duty
-                self.cash += revenue - total_cost
-                self.manager.transaction("BOT-sell",self.symbols[i], quantity, revenue, total_cost, "sucessful")
+                if quantity > 0:
+                    revenue = quantity * stock_price
+                    self.stocks[i] -= quantity
+                    brokerage = 1
+                    stt = 0.1 / 100 * revenue
+                    transaction_charge = 0.00325 / 100 * revenue
+                    gst = 18 / 100 * brokerage
+                    sebi_fee = 0.0001 / 100 * revenue
+                    stamp_duty = 0.015 / 100 * revenue
+                    total_cost = brokerage + stt + transaction_charge + gst + sebi_fee + stamp_duty
+                    self.cash += revenue - total_cost
+                    self.manager.transaction("BOT-sell",self.symbols[i], int(quantity), revenue, total_cost, "sucessful")
         if self.cash > self.min_balance:
             new_stocks = buy * (self.cash - self.min_balance)
             new_stocks = np.array(new_stocks / np.maximum(self.data[-1][26:].reshape((20,5))[:, self.close], 1e-8),dtype=np.int16)
@@ -81,17 +82,18 @@ class DeploymentStockMarketEnv:
                     stock_price = 1e-8  # Avoid issues with zero prices
                 if action_arr[i] == 0: # Buy
                     quantity = new_stocks[i]
-                    self.stocks[i] += quantity
-                    cost = quantity * stock_price
-                    brokerage = 20
-                    stt = 0.1 / 100 * cost
-                    transaction_charge = 0.00325 / 100 * cost
-                    gst = 18 / 100 * brokerage
-                    sebi_fee = 0.0001 / 100 * cost
-                    stamp_duty = 0.015 / 100 * cost
-                    total_cost = cost + brokerage + stt + transaction_charge + gst + sebi_fee + stamp_duty
-                    self.cash -= total_cost
-                    self.manager.transaction("BOT-buy",self.symbols[i], quantity, cost, total_cost-cost, "sucessful")
+                    if quantity>0:
+                        self.stocks[i] += quantity
+                        cost = quantity * stock_price
+                        brokerage = 1
+                        stt = 0.1 / 100 * cost
+                        transaction_charge = 0.00325 / 100 * cost
+                        gst = 18 / 100 * brokerage
+                        sebi_fee = 0.0001 / 100 * cost
+                        stamp_duty = 0.015 / 100 * cost
+                        total_cost = cost + brokerage + stt + transaction_charge + gst + sebi_fee + stamp_duty
+                        self.cash -= total_cost
+                        self.manager.transaction("BOT-buy",self.symbols[i], int(quantity), cost, total_cost-cost, "sucessful")
 
         if np.isnan(self.portfolio_value):
             raise ValueError("Portfolio value contains NaN values")
@@ -140,7 +142,7 @@ class DeploymentStockMarketEnv:
 
     def cash_deposit(self, cash, status):
         message =  "canceled"
-        if self.cash-self.min_balance >= cash and status:
+        if status:
             status = True
             self.cash += cash
             self.initial_cash += cash
@@ -151,6 +153,9 @@ class DeploymentStockMarketEnv:
 
     def buy_stocks(self, id, quantity, status):
         message =  "canceled"
+        if id == -1:
+            self.manager.transaction("USER-buy", "None", quantity, 0, 0, message)
+            return
         cost = self.manager.prices[id]*quantity
         if self.cash-self.min_balance >= cost and status:
             status = True
@@ -162,6 +167,9 @@ class DeploymentStockMarketEnv:
 
     def sell_stocks(self, id, quantity, status):
         message =  "canceled"
+        if id == -1:
+            self.manager.transaction("USER-sell", "None", quantity, 0, 0, message)
+            return
         cost = self.manager.prices[id]*quantity
         if self.stocks[id] >= quantity and status:
             status = True

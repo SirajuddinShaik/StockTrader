@@ -1,7 +1,7 @@
 import os
 from pathlib import Path
 from flask_apscheduler import APScheduler
-from flask import Flask, jsonify, request, render_template
+from flask import Flask, jsonify, redirect, request, render_template
 import numpy as np
 import requests
 
@@ -91,6 +91,7 @@ def get_all_data():
     profit = env.portfolio_value - env.initial_cash
     cash = env.cash
     investment = env.initial_cash
+    min_cash = env.min_balance
     last_prediction = account_state.get("last_pred_time_stamp", "")
     start_date = account_state.get("start_time_stamp", "")
     transactions = manager.get_last_10_transactions()
@@ -104,7 +105,8 @@ def get_all_data():
         "lastPrediction": last_prediction,
         "startDate": start_date,
         "transactions": transactions,
-        "stocks": stocks
+        "stocks": stocks,
+        "minCash": min_cash
     }
     return jsonify(data)
 
@@ -124,11 +126,11 @@ def get_curr_prices():
 @app.route('/api/transaction', methods=['POST'])
 def transaction():
     data = request.form.to_dict()
-    security_key_1 = data["security_key"]
+    security_key = data["security_key"]
     amount = int(data["amount"])
     stock_id = int(data["stock_id"])
     transaction_type = data["transaction_type"]
-    if security_key_1 == security_key:
+    if security_key == security_key:
         status = True
     else:
         status = False
@@ -143,7 +145,7 @@ def transaction():
     manager.update_account_state(env)
     print(env.render())
     
-    return jsonify({"status": "success"})
+    return redirect("/")
 
 
 @scheduler.task('interval', id='update_stocks', seconds=(60*60*4))
@@ -174,8 +176,8 @@ if __name__ == "__main__":
     # Initialize StockTransactionManager
     
     # manager.get_curr_prices()
-    # app.run(debug=True)
     manager.set_account_state(env)
     env.update_portfolio_1()
+    # app.run(debug=True)
     app.run(host='0.0.0.0', port=80)
 

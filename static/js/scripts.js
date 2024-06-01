@@ -17,6 +17,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
                 // Update cash balance
                 document.getElementById("account-cash").textContent = `$${data.cash.toFixed(2)}`;
+                document.getElementById("min-cash").textContent = `$${data.minCash.toFixed(2)}`;
 
                 // Update investment
                 document.getElementById("investment").textContent = `$${data.investment.toFixed(2)}`;
