@@ -75,6 +75,9 @@ def update(address):
     elif address == "price":
         manager.get_curr_prices()
         return jsonify({"status": "success"})
+    elif address == "predict":
+        update()
+        return jsonify({"status": "success"})
     else:
         return jsonify({"status": "invalid"})
 
