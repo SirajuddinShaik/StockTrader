@@ -39,7 +39,7 @@ document.addEventListener("DOMContentLoaded", function() {
                         <td>${transaction.quantity}</td>
                         <td>$${transaction.price.toFixed(2)}</td>
                         <td>$${transaction.total_tax.toFixed(2)}</td>
-                        <td>$${transaction.time_step}</td>
+                        <td>${transaction.time_step}</td>
                         <td>${transaction.message.toUpperCase()}</td>
                     `;
                     transactionHistoryList.appendChild(row);
@@ -50,9 +50,15 @@ document.addEventListener("DOMContentLoaded", function() {
                 stocksTableBody.innerHTML = '';  // Clear the existing table body content
                 for (const [stockName, stockDetails] of Object.entries(data.stocks)) {
                     const row = document.createElement('tr');
+                    if(stockDetails.current_price >= stockDetails.previous_price ){
+                        color = "#29d145";
+                    }else{
+                        color = "red";
+                    }
                     row.innerHTML = `
                         <td>${stockName}</td>
-                        <td>$${stockDetails.current_price.toFixed(2)}</td>
+                        <td>$${stockDetails.previous_price.toFixed(2)}</td>
+                        <td style="color: ${color};">$${stockDetails.current_price.toFixed(2)}</td>
                         <td>${stockDetails.quantity}</td>
                     `;
                     stocksTableBody.appendChild(row);

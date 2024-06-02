@@ -22,13 +22,14 @@ class StockTransactionManager:
         self.api_key3 = os.environ["TWELVE_DATA_API3"]
         self.symbols = get_symbols()
         self.prices = [0]*20
+        self.previous_prices = [0]*20
 
         # Initialize the account if not exists
         if self.account_collection.count_documents({}) == 0:
             self.account_collection.insert_one({
                 "_id": "9949",
                 "cash": 0,
-                "stocks": {self.symbols[i]: {"quantity": 0, "current_price": 0} for i in range(20)},
+                "stocks": {self.symbols[i]: {"quantity": 0, "current_price": 0, "previous_price": 0} for i in range(20)},
                 "portfolio": 0,
                 "investment" : 0,
                 "cash" : 0,
@@ -41,7 +42,7 @@ class StockTransactionManager:
         time_step = datetime.now()
         time_step = time_step.strftime("%d-%m-%Y %H:%M:%S")
         self.account_collection.update_one({"_id": "9949"},{"$set":{
-                "stocks": {self.symbols[i]: {"quantity": int(env.stocks[i]), "current_price": self.prices[i]} for i in range(20)},
+                "stocks": {self.symbols[i]: {"quantity": int(env.stocks[i]), "current_price": self.prices[i], "previous_price" :self.previous_prices[i]} for i in range(20)},
                 "portfolio": env.portfolio_value,
                 "investment" : env.initial_cash,
                 "min_balance" : env.min_balance,
@@ -103,6 +104,7 @@ class StockTransactionManager:
 
     def get_curr_prices(self):
         # return np.zeros((104,))
+        self.previous_prices = self.prices[:]
         try:
             dt_str = datetime.now()
             dt_str = dt_str.strftime("%Y-%m-%d %H:%M:%S")
