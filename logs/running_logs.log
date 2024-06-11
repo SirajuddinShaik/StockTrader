@@ -14617,3 +14617,110 @@ RuntimeError: cannot schedule new futures after shutdown
 [2024-06-02 14:41:58,008: INFO: base: Job "request_site (trigger: interval[0:00:10], next run at: 2024-06-02 14:42:07 IST)" executed successfully]
 [2024-06-02 14:42:03,096: INFO: base: Running job "request_site (trigger: interval[0:00:10], next run at: 2024-06-02 14:42:13 IST)" (scheduled at 2024-06-02 14:42:03.094534+05:30)]
 [2024-06-02 14:42:04,086: INFO: base: Job "request_site (trigger: interval[0:00:10], next run at: 2024-06-02 14:42:13 IST)" executed successfully]
+[2024-06-11 12:03:35,501: INFO: stage_01_data_ingestion: >>>>>>>>>>>>> Data Ingestion stage started <<<<<<<]
+[2024-06-11 12:03:35,534: INFO: common: yaml file: config\config.yaml loaded successfully]
+[2024-06-11 12:03:35,557: INFO: common: yaml file: params.yaml loaded successfully]
+[2024-06-11 12:03:35,568: INFO: common: yaml file: schema.yaml loaded successfully]
+[2024-06-11 12:03:35,570: INFO: common: created directory at: artifacts]
+[2024-06-11 12:03:35,572: INFO: common: created directory at: artifacts/data_ingestion]
+[2024-06-11 12:03:38,299: ERROR: stage_01_data_ingestion: cannot access local variable 'df' where it is not associated with a value]
+Traceback (most recent call last):
+  File "c:\Users\shaik\Desktop\Docker\StockTrader\src\stock_agent\pipeline\stage_01_data_ingestion.py", line 26, in <module>
+    obj.main()
+  File "c:\Users\shaik\Desktop\Docker\StockTrader\src\stock_agent\pipeline\stage_01_data_ingestion.py", line 17, in main
+    data_ingestion.download_new_data()
+  File "c:\users\shaik\desktop\docker\stocktrader\src\stock_agent\components\data_ingestion.py", line 38, in download_new_data
+    df['open'] = pd.to_numeric(df['open'], errors='coerce') * current_price
+                               ^^
+UnboundLocalError: cannot access local variable 'df' where it is not associated with a value
+[2024-06-11 12:04:31,886: INFO: stage_01_data_ingestion: >>>>>>>>>>>>> Data Ingestion stage started <<<<<<<]
+[2024-06-11 12:04:31,899: INFO: common: yaml file: config\config.yaml loaded successfully]
+[2024-06-11 12:04:31,901: INFO: common: yaml file: params.yaml loaded successfully]
+[2024-06-11 12:04:31,903: INFO: common: yaml file: schema.yaml loaded successfully]
+[2024-06-11 12:04:31,904: INFO: common: created directory at: artifacts]
+[2024-06-11 12:04:31,906: INFO: common: created directory at: artifacts/data_ingestion]
+[2024-06-11 12:04:34,043: INFO: data_ingestion: >>>>>>>>>> AAPL.csv saved to artifacts <<<<<<<<]
+[2024-06-11 12:04:37,680: INFO: data_ingestion: >>>>>>>>>> MSFT.csv saved to artifacts <<<<<<<<]
+[2024-06-11 12:04:40,084: INFO: data_ingestion: >>>>>>>>>> AMZN.csv saved to artifacts <<<<<<<<]
+[2024-06-11 12:04:50,406: INFO: data_ingestion: >>>>>>>>>> GOOGL.csv saved to artifacts <<<<<<<<]
+[2024-06-11 12:04:52,371: INFO: data_ingestion: >>>>>>>>>> META.csv saved to artifacts <<<<<<<<]
+[2024-06-11 12:04:54,329: INFO: data_ingestion: >>>>>>>>>> BRK.B.csv saved to artifacts <<<<<<<<]
+[2024-06-11 12:04:57,029: INFO: data_ingestion: >>>>>>>>>> JNJ.csv saved to artifacts <<<<<<<<]
+[2024-06-11 12:04:58,828: INFO: data_ingestion: >>>>>>>>>> V.csv saved to artifacts <<<<<<<<]
+[2024-06-11 12:05:03,553: INFO: data_ingestion: >>>>>>>>>> PG.csv saved to artifacts <<<<<<<<]
+[2024-06-11 12:05:05,731: INFO: data_ingestion: >>>>>>>>>> JPM.csv saved to artifacts <<<<<<<<]
+[2024-06-11 12:05:07,733: INFO: data_ingestion: >>>>>>>>>> TSLA.csv saved to artifacts <<<<<<<<]
+[2024-06-11 12:37:23,085: INFO: stage_02_data_validation: >>>>>>>>>>>>> Data Validation stage started <<<<<<<]
+[2024-06-11 12:37:23,096: INFO: common: yaml file: config\config.yaml loaded successfully]
+[2024-06-11 12:37:23,098: INFO: common: yaml file: params.yaml loaded successfully]
+[2024-06-11 12:37:23,099: INFO: common: yaml file: schema.yaml loaded successfully]
+[2024-06-11 12:37:23,100: INFO: common: created directory at: artifacts]
+[2024-06-11 12:37:23,102: INFO: common: created directory at: artifacts/data_validation]
+[2024-06-11 12:37:23,103: ERROR: stage_02_data_validation: get_symbols() takes 0 positional arguments but 1 was given]
+Traceback (most recent call last):
+  File "c:\Users\shaik\Desktop\Docker\StockTrader\src\stock_agent\pipeline\stage_02_data_validation.py", line 27, in <module>
+    obj.main()
+  File "c:\Users\shaik\Desktop\Docker\StockTrader\src\stock_agent\pipeline\stage_02_data_validation.py", line 18, in main
+    data_validation = DataValidation(data_validation_config)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\users\shaik\desktop\docker\stocktrader\src\stock_agent\components\data_validation.py", line 11, in __init__
+    self.symbols = get_symbols(SYMBOLS_FILE_PATH)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\shaik\Documents\Programing\TFOD\tfod\Lib\site-packages\ensure\main.py", line 849, in __call__
+    return_val = self.f(*args, **kwargs)
+                 ^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: get_symbols() takes 0 positional arguments but 1 was given
+[2024-06-11 12:38:09,139: INFO: stage_02_data_validation: >>>>>>>>>>>>> Data Validation stage started <<<<<<<]
+[2024-06-11 12:38:09,146: INFO: common: yaml file: config\config.yaml loaded successfully]
+[2024-06-11 12:38:09,150: INFO: common: yaml file: params.yaml loaded successfully]
+[2024-06-11 12:38:09,152: INFO: common: yaml file: schema.yaml loaded successfully]
+[2024-06-11 12:38:09,154: INFO: common: created directory at: artifacts]
+[2024-06-11 12:38:09,155: INFO: common: created directory at: artifacts/data_validation]
+[2024-06-11 12:38:09,157: ERROR: stage_02_data_validation: DataFrame constructor not properly called!]
+Traceback (most recent call last):
+  File "c:\Users\shaik\Desktop\Docker\StockTrader\src\stock_agent\pipeline\stage_02_data_validation.py", line 27, in <module>
+    obj.main()
+  File "c:\Users\shaik\Desktop\Docker\StockTrader\src\stock_agent\pipeline\stage_02_data_validation.py", line 19, in main
+    data_validation.clean()
+  File "c:\users\shaik\desktop\docker\stocktrader\src\stock_agent\components\data_validation.py", line 18, in clean
+    df = pd.DataFrame(file)
+         ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\shaik\Documents\Programing\TFOD\tfod\Lib\site-packages\pandas\core\frame.py", line 817, in __init__
+    raise ValueError("DataFrame constructor not properly called!")
+ValueError: DataFrame constructor not properly called!
+[2024-06-11 12:41:28,505: INFO: stage_02_data_validation: >>>>>>>>>>>>> Data Validation stage started <<<<<<<]
+[2024-06-11 12:41:28,510: INFO: common: yaml file: config\config.yaml loaded successfully]
+[2024-06-11 12:41:28,513: INFO: common: yaml file: params.yaml loaded successfully]
+[2024-06-11 12:41:28,516: INFO: common: yaml file: schema.yaml loaded successfully]
+[2024-06-11 12:41:28,518: INFO: common: created directory at: artifacts]
+[2024-06-11 12:41:28,519: INFO: common: created directory at: artifacts/data_validation]
+[2024-06-11 12:41:28,520: ERROR: stage_02_data_validation: DataFrame constructor not properly called!]
+Traceback (most recent call last):
+  File "c:\Users\shaik\Desktop\Docker\StockTrader\src\stock_agent\pipeline\stage_02_data_validation.py", line 27, in <module>
+    obj.main()
+  File "c:\Users\shaik\Desktop\Docker\StockTrader\src\stock_agent\pipeline\stage_02_data_validation.py", line 19, in main
+    data_validation.clean()
+  File "c:\users\shaik\desktop\docker\stocktrader\src\stock_agent\components\data_validation.py", line 19, in clean
+    df = pd.DataFrame(file)
+         ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\shaik\Documents\Programing\TFOD\tfod\Lib\site-packages\pandas\core\frame.py", line 817, in __init__
+    raise ValueError("DataFrame constructor not properly called!")
+ValueError: DataFrame constructor not properly called!
+[2024-06-11 12:42:32,296: INFO: stage_02_data_validation: >>>>>>>>>>>>> Data Validation stage started <<<<<<<]
+[2024-06-11 12:42:32,307: INFO: common: yaml file: config\config.yaml loaded successfully]
+[2024-06-11 12:42:32,310: INFO: common: yaml file: params.yaml loaded successfully]
+[2024-06-11 12:42:32,312: INFO: common: yaml file: schema.yaml loaded successfully]
+[2024-06-11 12:42:32,342: INFO: common: created directory at: artifacts]
+[2024-06-11 12:42:32,347: INFO: common: created directory at: artifacts/data_validation]
+[2024-06-11 12:42:34,093: INFO: stage_02_data_validation: >>>>>>>>>>>>> Data Validation stage completed <<<<<<<]
+[2024-06-11 12:45:23,194: INFO: stage_03_data_transformation: >>>>>>>>>>>> Data Transformation Stage started <<<<<<<<<<<]
+[2024-06-11 12:45:23,219: INFO: common: yaml file: config\config.yaml loaded successfully]
+[2024-06-11 12:45:23,223: INFO: common: yaml file: params.yaml loaded successfully]
+[2024-06-11 12:45:23,225: INFO: common: yaml file: schema.yaml loaded successfully]
+[2024-06-11 12:45:23,226: INFO: common: created directory at: artifacts]
+[2024-06-11 12:45:23,227: INFO: common: created directory at: artifacts/data_transformation]
+[2024-06-11 12:45:26,384: INFO: data_transformation: All Stocks Data Combined at artifacts/data_transformation\all_stocks.csv]
+[2024-06-11 12:45:27,230: INFO: data_transformation: Splited data into training and test sets]
+[2024-06-11 12:45:27,230: INFO: data_transformation: (1942, 104)]
+[2024-06-11 12:45:27,231: INFO: data_transformation: (648, 104)]
+[2024-06-11 12:45:27,233: INFO: stage_03_data_transformation: >>>>>>>>>>>> Data Transformation Stage completed <<<<<<<<<]

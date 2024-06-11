@@ -8,7 +8,7 @@ import pandas as pd
 class DataValidation:
     def __init__(self, config:DataValidationConfig):
         self.config = config
-        self.symbols = get_symbols(SYMBOLS_FILE_PATH)
+        self.symbols = get_symbols()
         self.data_dir=config.data_dir+"/{symbol}.csv"
         self.root_dir=config.root_dir+"/{symbol}.csv"
 
@@ -16,7 +16,7 @@ class DataValidation:
     def clean(self):
         for symbol in self.symbols:
             file = self.data_dir.format(symbol = symbol)
-            df = pd.DataFrame(file)
+            df = pd.read_csv(file)
             df = self.remove_null(df)
             self.save_csv(df, symbol)
             

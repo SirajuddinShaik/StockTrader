@@ -64,7 +64,7 @@ class DeploymentStockMarketEnv:
                 if quantity > 0:
                     revenue = quantity * stock_price
                     self.stocks[i] -= quantity
-                    brokerage = 1
+                    brokerage = 20
                     stt = 0.1 / 100 * revenue
                     transaction_charge = 0.00325 / 100 * revenue
                     gst = 18 / 100 * brokerage
@@ -85,7 +85,7 @@ class DeploymentStockMarketEnv:
                     if quantity>0:
                         self.stocks[i] += quantity
                         cost = quantity * stock_price
-                        brokerage = 1
+                        brokerage = 20
                         stt = 0.1 / 100 * cost
                         transaction_charge = 0.00325 / 100 * cost
                         gst = 18 / 100 * brokerage
