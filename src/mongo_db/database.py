@@ -109,6 +109,10 @@ class StockTransactionManager:
             dt_str = datetime.now()
             dt_str = dt_str.strftime("%Y-%m-%d %H:%M:%S")
             components = dt_str.replace('-', ' ').replace(':', ' ').split()[:-2]
+            
+            exchange_api = os.environ["Exchange_API"]
+            exc = f"https://v6.exchangerate-api.com/v6/{exchange_api}/latest/USD"
+            current_price = requests.get(exc).json()["conversion_rates"]["INR"]
             for i,symbol in enumerate(self.symbols):
                 uri = f"https://api.twelvedata.com/time_series?apikey={self.api_key1}&interval=1min&format=JSON&outputsize=1&type=stock&symbol={symbol}&end_date={dt_str}"
                 response = requests.get(uri).json()
@@ -122,9 +126,13 @@ class StockTransactionManager:
                     time.sleep(61)
                     response = requests.get(uri).json()
                 data = response["values"][0]
-                self.prices[i] = float(data["close"])
+                self.prices[i] =  float(data["close"])
                 for type in ["open", "high", "low", "close", "volume"]:
-                    components.append(data[type])
+                    if type == "volume":
+                        components.append(data[type])
+                    else:
+                        components.append(float(data[type]) * current_price)
+
             components = list(map(float, components))
             # print(len(components),components)
             return components

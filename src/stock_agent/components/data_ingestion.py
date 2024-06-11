@@ -17,7 +17,8 @@ class DataIngestion:
 
 
     def download_new_data(self, interval = "4h"):
-        exc = "https://v6.exchangerate-api.com/v6/1864610cab1288d6ed7f3374/latest/USD"
+        exchange_api = os.environ["Exchange_API"]
+        exc = f"https://v6.exchangerate-api.com/v6/{exchange_api}/latest/USD"
         uri_format = "https://api.twelvedata.com/time_series?apikey={api}&interval={interval}&start_date={start_date}&end_date={end_date}&format=JSON&symbol={symbol}"
         symbols = get_symbols()
         ll,ul = self.get_interval(5)
