@@ -2,7 +2,7 @@
 import numpy as np
 
 class StockMarketEnv:
-    def __init__(self, num_stocks, sampler, history_len = 10, min_balance = 2000, initial_cash = 150000):
+    def __init__(self, num_stocks, sampler, history_len = 10, min_balance = 5000, initial_cash = 500000):
         self.num_stocks = num_stocks
         self.h_l = history_len
         self.initial_cash = initial_cash

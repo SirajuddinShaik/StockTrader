@@ -5,7 +5,7 @@ document.addEventListener("DOMContentLoaded", function() {
             .then(response => response.json())
             .then(data => {
                 // Update portfolio value
-                document.getElementById("portfolio-value").textContent = `$${data.portfolio.toFixed(2)}`;
+                document.getElementById("portfolio-value").textContent = `₹${data.portfolio.toFixed(2)}`;
                 
                 // Update profit/loss
                 if(data.profit > 0){
@@ -13,14 +13,14 @@ document.addEventListener("DOMContentLoaded", function() {
                 }else{
                     document.getElementById("profit-loss").style.color = "red";
                 }
-                document.getElementById("profit-loss").textContent = `$${data.profit.toFixed(2)}`;
+                document.getElementById("profit-loss").textContent = `₹${data.profit.toFixed(2)}`;
 
                 // Update cash balance
-                document.getElementById("account-cash").textContent = `$${data.cash.toFixed(2)}`;
-                document.getElementById("min-cash").textContent = `$${data.minCash.toFixed(2)}`;
+                document.getElementById("account-cash").textContent = `₹${data.cash.toFixed(2)}`;
+                document.getElementById("min-cash").textContent = `₹${data.minCash.toFixed(2)}`;
 
                 // Update investment
-                document.getElementById("investment").textContent = `$${data.investment.toFixed(2)}`;
+                document.getElementById("investment").textContent = `₹${data.investment.toFixed(2)}`;
 
                 // Update last prediction date
                 document.getElementById("last-prediction-date").textContent = `${data.lastPrediction}`;
@@ -37,8 +37,8 @@ document.addEventListener("DOMContentLoaded", function() {
                         <td><strong>${transaction.type.toUpperCase()}</strong></td> 
                         <td>${transaction.stock}</td>
                         <td>${transaction.quantity}</td>
-                        <td>$${transaction.price.toFixed(2)}</td>
-                        <td>$${transaction.total_tax.toFixed(2)}</td>
+                        <td>₹${transaction.price.toFixed(2)}</td>
+                        <td>₹${transaction.total_tax.toFixed(2)}</td>
                         <td>${transaction.time_step}</td>
                         <td>${transaction.message.toUpperCase()}</td>
                     `;
@@ -57,12 +57,92 @@ document.addEventListener("DOMContentLoaded", function() {
                     }
                     row.innerHTML = `
                         <td>${stockName}</td>
-                        <td>$${stockDetails.previous_price.toFixed(2)}</td>
-                        <td style="color: ${color};">$${stockDetails.current_price.toFixed(2)}</td>
+                        <td>₹${stockDetails.previous_price.toFixed(2)}</td>
+                        <td style="color: ${color};">₹${stockDetails.current_price.toFixed(2)}</td>
                         <td>${stockDetails.quantity}</td>
                     `;
                     stocksTableBody.appendChild(row);
                 }
+                
+
+        const lmctx = document.getElementById('lastMonthChart').getContext('2d');
+        
+        // Create the chart
+        const mylmChart = new Chart(ctx, {
+            type: 'line', // Specify the chart type
+            data: {
+                labels: data.history.date,
+                datasets: [{
+                    label: 'Last Month',
+                    data: data.history.date,
+                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    x: {
+                        type: 'linear',
+                        ticks: {
+                            callback: function(value) {
+                                return Number.isInteger(value) ? value : null;
+                            }
+                        }
+                    },
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            callback: function(value) {
+                                return Number.isInteger(value) ? value : null;
+                            }
+                        }
+                    }
+                }
+            }
+        });
+
+        const ctx = document.getElementById('allTimeChart').getContext('2d');
+        
+        // Create the chart
+        const myalChart = new Chart(ctx, {
+            type: 'line', // Specify the chart type
+            data: {
+                labels: data.history.date,
+                datasets: [{
+                    label: 'All Time Profit',
+                    data: data.history.date,
+                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    x: {
+                        type: 'linear',
+                        ticks: {
+                            callback: function(value) {
+                                return Number.isInteger(value) ? value : null;
+                            }
+                        }
+                    },
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            callback: function(value) {
+                                return Number.isInteger(value) ? value : null;
+                            }
+                        }
+                    }
+                }
+            }
+        });
+
             })
             .catch(error => console.error('Error fetching data:', error));
     }

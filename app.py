@@ -93,6 +93,7 @@ def get_all_data():
     investment = env.initial_cash
     min_cash = env.min_balance
     last_prediction = account_state.get("last_pred_time_stamp", "")
+    history = account_state.get("history", "")
     start_date = account_state.get("start_time_stamp", "")
     transactions = manager.get_last_10_transactions()
     stocks = account_state.get("stocks", {})
@@ -106,7 +107,8 @@ def get_all_data():
         "startDate": start_date,
         "transactions": transactions,
         "stocks": stocks,
-        "minCash": min_cash
+        "minCash": min_cash,
+        "history": history
     }
     return jsonify(data)
 

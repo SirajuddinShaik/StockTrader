@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Stock Trading Dashboard</title>
     <link rel="stylesheet" href="/static/css/styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
 </head>
 <body>
     <div class="container">
@@ -70,7 +71,7 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="stock-id">Stock ID:</label>
+                        <label for="stock-type">Stock ID:</label>
                         <select id="stock-type" name="stock_id">
                                 <option value="0">None</option>
                                 <option value="1">AAPL</option>
@@ -128,7 +129,18 @@
                     </tbody>
                 </table>
             </section>
-            
+            <section class="transaction-history">
+                <h2>Profit Graph</h2>
+                <h3>Last Month</h3>
+                <div style="width: 100%;max-height: 20rem;">
+                    <canvas id="lastMonthChart"></canvas>
+                </div>
+                <br>
+                <h3>All Time</h3>
+                <div style="width: 100%;max-height: 20rem;">
+                    <canvas id="allTimeChart"></canvas>
+                </div>
+            </section>
         <footer>
             <div class="contact-links">
                 <a href="https://www.linkedin.com/in/shaik-sirajuddin-144484243" target="_blank">LinkedIn</a>
@@ -137,7 +149,56 @@
             </div>
         </footer></br></br>
         </div>
+        
     </div>
-    <script src="/static/js/scripts.js"></script>
+    
+    <script>
+        // Sample data
+        const labels = [4,2,5,2,4,55,3,4,2,5,2,4,55,3,4,2,5,2,4,55,3,4,2,5,2,4,55,3,4,2,5,2,4,55,3,4,2,5,2,4,55,3,4,2,5,2,4,55,3,4,2,5,2,4,55,3,4,2,5,2,4,55,3,4,2,5,2,4,55,3,4,2,5,2,4,55,3,4,2,5,2,4,55,3,4,2,5,2,4,55,3,4,2,5,2,4,55,3,4,2,5,2,4,55,3,4,2,5,2,4,55,3]
+        
+        const data = [65, 59, 80, 81, 56, 55, 40,65, 59, 80, 81, 56, 55, 40,65, 59, 80, 81, 56, 55, 40,65, 59, 80, 81, 56, 55, 40,4,2,5,2,4,55,3,4,2,5,2,4,55,3,4,2,5,2,4,55,3,4,2,5,2,4,55,3,4,2,5,2,4,55,3,4,2,5,2,4,55,3,4,2,5,2,4,55,3,4,2,5,2,4,55,3,4,2,5,2,4,55,3,4,2,5,2,4,55,3,4,2,5,2,4,55,3,4,2,5,2,4,55,3];
+        
+        // Get the context of the canvas element we want to select
+        const ctx = document.getElementById('myChart').getContext('2d');
+        
+        // Create the chart
+        const myChart = new Chart("myChart", {
+            type: 'line', // Specify the chart type
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Monthly Sales',
+                    data: data,
+                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    x: {
+                        type: 'linear',
+
+                        ticks: {
+                            callback: function(value) {
+                                return Number.isInteger(value) ? value : null;
+                            }
+                        }
+                    },
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            callback: function(value) {
+                                return Number.isInteger(value) ? value : null;
+                            }
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+    <!-- <script src="/static/js/scripts.js"></script> -->
 </body>
 </html>

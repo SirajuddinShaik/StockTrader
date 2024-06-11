@@ -23,6 +23,8 @@ class StockTransactionManager:
         self.symbols = get_symbols()
         self.prices = [0]*20
         self.previous_prices = [0]*20
+        self.day = -1
+        self.history=self.get_history()
 
         # Initialize the account if not exists
         if self.account_collection.count_documents({}) == 0:
@@ -53,6 +55,7 @@ class StockTransactionManager:
                 "data" : [i.tolist() for i in env.data],
                 "current_step" : env.current_step,
                 "prices" : self.prices,
+                "history" : self.history,
                 "last_pred_time_stamp" : time_step,
             }})
     
@@ -90,6 +93,13 @@ class StockTransactionManager:
     def get_portfolio(self):
         account_state = self.get_account_state()
         return account_state['portfolio']
+    def get_profit(self):
+        account_state = self.get_account_state()
+        return account_state['portfolio'] - account_state['investment']
+
+    def get_history(self):
+        account_state = self.get_account_state()
+        return account_state['history']
 
     def get_cash(self):
         account_state = self.get_account_state()
@@ -104,12 +114,17 @@ class StockTransactionManager:
 
     def get_curr_prices(self):
         # return np.zeros((104,))
-        self.previous_prices = self.prices[:]
         try:
             dt_str = datetime.now()
             dt_str = dt_str.strftime("%Y-%m-%d %H:%M:%S")
             components = dt_str.replace('-', ' ').replace(':', ' ').split()[:-2]
-            
+            day = int("".join([str(i) for i in components[:3]]))
+            if self.day != day:
+                self.previous_prices = self.prices[:]
+                self.day = day
+                self.history["date"].append(day)
+                self.history["profit"].append(self.get_profit())
+
             exchange_api = os.environ["Exchange_API"]
             exc = f"https://v6.exchangerate-api.com/v6/{exchange_api}/latest/USD"
             current_price = requests.get(exc).json()["conversion_rates"]["INR"]
