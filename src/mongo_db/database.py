@@ -35,6 +35,13 @@ class StockTransactionManager:
                 "portfolio": 0,
                 "investment" : 0,
                 "cash" : 0,
+                "h_l" : {"date":[],"profit":[]},
+                "previous_portfolio_value" : 0,
+                "data" : [i.tolist() for i in np.zeros((20,))],
+                "current_step" : 3,
+                "prices" : self.prices,
+                "history" : self.history,
+                "last_pred_time_stamp" : "time_step",
             })
 
     def get_account_state(self):
@@ -128,6 +135,7 @@ class StockTransactionManager:
             exchange_api = os.environ["Exchange_API"]
             exc = f"https://v6.exchangerate-api.com/v6/{exchange_api}/latest/USD"
             current_price = requests.get(exc).json()["conversion_rates"]["INR"]
+            print(f"current -----sdfsdfsdfsdfds------------>{current_price}")
             for i,symbol in enumerate(self.symbols):
                 uri = f"https://api.twelvedata.com/time_series?apikey={self.api_key1}&interval=1min&format=JSON&outputsize=1&type=stock&symbol={symbol}&end_date={dt_str}"
                 response = requests.get(uri).json()
@@ -141,7 +149,7 @@ class StockTransactionManager:
                     time.sleep(61)
                     response = requests.get(uri).json()
                 data = response["values"][0]
-                self.prices[i] =  float(data["close"])
+                self.prices[i] =  float(data["close"]) * current_price
                 for type in ["open", "high", "low", "close", "volume"]:
                     if type == "volume":
                         components.append(data[type])
@@ -149,7 +157,7 @@ class StockTransactionManager:
                         components.append(float(data[type]) * current_price)
 
             components = list(map(float, components))
-            # print(len(components),components)
+            print(len(components),components)
             return components
         except Exception as e:
             print(e)

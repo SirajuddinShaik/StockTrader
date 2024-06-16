@@ -68,7 +68,7 @@ document.addEventListener("DOMContentLoaded", function() {
         const lmctx = document.getElementById('lastMonthChart').getContext('2d');
         
         // Create the chart
-        const mylmChart = new Chart(ctx, {
+        const mylmChart = new Chart(lmctx, {
             type: 'line', // Specify the chart type
             data: {
                 labels: data.history.date,

@@ -157,7 +157,6 @@ def update():
         print(manager.prices)
         updater.update(np.array(components))
         action = np.squeeze(actor(np.expand_dims(env.get_observation(),0)))
-        print(action)
         env.step(action)
         manager.update_account_state(env)
         print(env.render())
@@ -180,6 +179,6 @@ if __name__ == "__main__":
     # manager.get_curr_prices()
     manager.set_account_state(env)
     env.update_portfolio_1()
-    # app.run(debug=True)
-    app.run(host='0.0.0.0', port=80)
+    app.run(debug=True)
+    # app.run(host='0.0.0.0', port=80)
 

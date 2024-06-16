@@ -1,5 +1,5 @@
 # 📈 StockTrader
-
+A model capable to predicting multiple buy and sell actions simultaneously.
 Its 🔥LIve at https://stocktrader-6dv1.onrender.com
 
 
@@ -22,7 +22,7 @@ Welcome to the StockTrader project! This repository contains an end-to-end stock
 
 ## Overview
 
-StockTrader leverages deep reinforcement learning to predict stock market actions such as buying, selling, or holding stocks. The project uses the DDPG algorithm to train an actor-critic model that makes decisions based on historical stock data. The app is developed using Flask and predicts stock actions every 4 hours.
+StockTrader leverages deep reinforcement learning to predict stock market actions such as buying, selling, or holding stocks. The project uses the DDPG algorithm to train an actor-critic model that makes decisions based on historical stock data. The app is developed using Flask and predicts stock actions every 4 hours. The model is capable of predicting multiple buy and sell actions simultaneously.
 
 ## Pipeline Details
 
@@ -40,7 +40,7 @@ In the data transformation pipeline, data from 20 different stocks is combined i
 
 ### Model Training 🏋️‍♂️
 
-The model training pipeline uses the cleaned and transformed data to train the DDPG model. The training process is implemented in `model_training.py`, where the model is optimized to make accurate stock trading decisions.
+The model training pipeline uses the cleaned and transformed data to train the DDPG model. The training process is implemented in `model_trainer.py`, where the model is optimized to make accurate stock trading decisions.
 
 ### Model Evaluation 📊
 
