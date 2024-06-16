@@ -71,10 +71,10 @@ document.addEventListener("DOMContentLoaded", function() {
         const mylmChart = new Chart(lmctx, {
             type: 'line', // Specify the chart type
             data: {
-                labels: data.history.date,
+                labels: data.history.dateslice(-30,),
                 datasets: [{
                     label: 'Last Month',
-                    data: data.history.date,
+                    data: data.history.profitslice(-30,),
                     backgroundColor: 'rgba(75, 192, 192, 0.2)',
                     borderColor: 'rgba(75, 192, 192, 1)',
                     borderWidth: 1
@@ -113,7 +113,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 labels: data.history.date,
                 datasets: [{
                     label: 'All Time Profit',
-                    data: data.history.date,
+                    data: data.history.profit,
                     backgroundColor: 'rgba(75, 192, 192, 0.2)',
                     borderColor: 'rgba(75, 192, 192, 1)',
                     borderWidth: 1
