@@ -8,17 +8,17 @@ Welcome to the StockTrader project! This repository contains an end-to-end stock
 
 - [Overview](#overview)
 - [Pipeline Details](#pipeline-details)
-  - [Data Ingestion](#data-ingestion)
-  - [Data Evaluation](#data-evaluation)
-  - [Data Transformation](#data-transformation)
-  - [Model Training](#model-training)
-  - [Model Evaluation](#model-evaluation)
-- [Model Architecture](#model-architecture)
-- [Prediction Interval](#prediction-interval)
-- [Usage](#usage)
+  - [Data Ingestion](#data-ingestion-)
+  - [Data Evaluation](#data-evaluation-)
+  - [Data Transformation](#data-transformation-)
+  - [Model Training](#model-training-)
+  - [Model Evaluation](#model-evaluation-)
+- [Model Architecture](#model-architecture-)
+- [Prediction Interval](#prediction-interval-)
+- [Usage](#usage-)
 - [Environment Variables](#environment-variables)
-- [Contributing](#contributing)
-- [License](#license)
+- [Contributing](#contributing-)
+- [License](#license-)
 
 ## Overview
 
