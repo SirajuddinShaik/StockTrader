@@ -1,5 +1,6 @@
 # 📈 StockTrader
 A model capable to predicting multiple buy and sell actions simultaneously.
+
 🔥LIve results here https://stocktrader-6dv1.onrender.com 
 
 Welcome to the StockTrader project! This repository contains an end-to-end stock trading MLOps pipeline using a Deep Deterministic Policy Gradient (DDPG) algorithm for reinforcement learning. The project involves several key steps, from data ingestion to model training and evaluation, all aimed at creating a robust stock trading system.
