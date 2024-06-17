@@ -24,7 +24,6 @@ class StockTransactionManager:
         self.prices = [0]*20
         self.previous_prices = [0]*20
         self.day = -1
-        self.history=self.get_history()
 
         # Initialize the account if not exists
         if self.account_collection.count_documents({}) == 0:
@@ -35,14 +34,15 @@ class StockTransactionManager:
                 "portfolio": 0,
                 "investment" : 0,
                 "cash" : 0,
-                "h_l" : {"date":[],"profit":[]},
+                "history" : {"date":[],"profit":[]},
+                "h_l" : 10,
                 "previous_portfolio_value" : 0,
                 "data" : [i.tolist() for i in np.zeros((20,))],
                 "current_step" : 3,
                 "prices" : self.prices,
-                "history" : self.history,
                 "last_pred_time_stamp" : "time_step",
             })
+        self.history=self.get_history()
 
     def get_account_state(self):
         return self.account_collection.find_one({"_id": "9949"})
@@ -80,6 +80,7 @@ class StockTransactionManager:
             env.data = [np.array(data) for data in account_state.get("data", [])]
             env.current_step = account_state.get("current_step", 0)
             self.prices = account_state.get("prices", [0]*20)
+            self.history = account_state.get("history", {"date":[],"profit":[]})
     
     def transaction(self, type, stock, quantity, price, total_tax, message):
         self.transactions_collection.insert_one({
