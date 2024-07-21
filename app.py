@@ -161,9 +161,11 @@ def update():
         manager.update_account_state(env)
         print(env.render())
 
-@scheduler.task('interval', id='inactive', seconds=(10))
+@scheduler.task('interval', id='inactive', seconds=(20))
 def request_site():
     uri = "https://stocktrader-6dv1.onrender.com/api/cash"
+    response = requests.get(uri).json()
+    uri = "https://portfolio-server-vcsv.onrender.com"
     response = requests.get(uri).json()
 
 def update_env(env):
