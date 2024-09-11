@@ -166,7 +166,7 @@ def request_site():
     uri = "https://stocktrader-6dv1.onrender.com/api/cash"
     response = requests.get(uri).json()
     uri = "https://portfolio-server-vcsv.onrender.com"
-    response = requests.get(uri).json()
+    response = requests.get(uri)
 
 def update_env(env):
     obj = ModelEvaluationTrainingPipeline()
