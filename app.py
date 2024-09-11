@@ -164,7 +164,7 @@ def update():
 @scheduler.task('interval', id='inactive', seconds=(20))
 def request_site():
     uri = "https://stocktrader-6dv1.onrender.com/api/cash"
-    response = requests.get(uri).json()
+    response = requests.get(uri)
     uri = "https://portfolio-server-vcsv.onrender.com"
     response = requests.get(uri)
 
