@@ -6,6 +6,7 @@ APScheduler
 Flask-APScheduler
 tensorflow
 numpy
+pytz
 pymongo
 requests
 python-box==6.0.2
