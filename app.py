@@ -4,6 +4,8 @@ from flask_apscheduler import APScheduler
 from flask import Flask, jsonify, redirect, request, render_template
 import numpy as np
 import requests
+from datetime import datetime
+import pytz
 
 
 from src.mongo_db.database import StockTransactionManager
@@ -163,10 +165,13 @@ def update():
 
 @scheduler.task('interval', id='inactive', seconds=(20))
 def request_site():
+    india_tz = pytz.timezone("Asia/Kolkata")
+    current_time = datetime.now(india_tz).time()
     uri = "https://stocktrader-6dv1.onrender.com/api/cash"
     response = requests.get(uri)
-    uri = "https://portfolio-server-vcsv.onrender.com"
-    response = requests.get(uri)
+    if current_time.hour < 0 and current_time.hour > 5:
+        uri = "https://portfolio-server-vcsv.onrender.com"
+        response = requests.get(uri)
 
 def update_env(env):
     obj = ModelEvaluationTrainingPipeline()
