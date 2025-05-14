@@ -169,9 +169,9 @@ def request_site():
     current_time = datetime.now(india_tz).time()
     uri = "https://stocktrader-6dv1.onrender.com/api/cash"
     response = requests.get(uri)
-    if current_time.hour > 5:
-        uri = "https://portfolio-server-vcsv.onrender.com"
-        response = requests.get(uri)
+    # if current_time.hour > 5:
+    uri = "https://portfolio-server-vcsv.onrender.com"
+    response = requests.get(uri)
 
 def update_env(env):
     obj = ModelEvaluationTrainingPipeline()
